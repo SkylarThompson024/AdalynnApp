@@ -1,0 +1,61 @@
+:root {
+  /* Global Colors */
+  --raspberryPink: #E74689;
+  --mintyGreen: #46E7AC;
+  --blueGrace: #6F9DE0;
+  --darkCornflowerBlue: #496793;
+ 
+}
+#wrapper {
+  height: 100vh;
+  width: 100vw;
+  background-image: linear-gradient(135deg, var(--mintyGreen), var(--blueGrace), var(--raspberryPink));
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+#pictureContainer {
+  background-color: black;
+  width: 50vw;
+  height: 70vh;
+}
+
+#tabsContainer {
+  width: 30vw;
+  height: 70vh;
+  margin-top: 25px;
+  margin-inline: auto;
+  /* background-color: var(--raspberryPink);
+  border-radius: 15px;
+  border-style: solid;
+  border-color: var(--darkCornflowerBlue);
+  border-width: 5px; */
+
+}
+
+.tabRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+  border: #46E7AC 2px solid;
+}
+
+.card {
+  width: 150px;
+  height: 150px;
+  margin: 15px;
+  background-color: var(--darkCornflowerBlue);
+  border-radius: 15px;
+  border-style: solid;
+  border-color: var(--blueGrace);
+  border-width: 5px;
+}
+
+
+

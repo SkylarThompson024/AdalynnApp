@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'actionj';
+    src: url('../fonts/actionj.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+header {
+    width: 30vw;
+    max-height: min-content;
+    background-color: var(--raspberryPink);
+    margin-inline: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-inline: 15px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--blueGrace);
+    border-width: 5px;
+    text-align: center;
+}
+
+text {
+    color: white;
+    font-family: 'actionj';
+    font-size: 80px;
+    text-shadow: black 2px 3px 5px;
+
+}
