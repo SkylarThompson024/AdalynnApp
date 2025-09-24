@@ -1,9 +1,65 @@
+import { Link } from 'react-router-dom';
+import '../assets/styles/index.css';
 
-function Card({ children }) {
+
+const labels = [
+    {
+        name: 'Feedings',
+        icon: 'restaurant',
+        to: '/feed'
+    },
+    {
+        name: 'Sleeps',
+        icon: 'crib',
+        to: '/sleep'
+    },
+    {
+        name: 'Diaper Change',
+        icon: 'baby_changing_station',
+        to: '/diaper'
+    },
+    {
+        name: 'Doctor Appts',
+        icon: 'health_and_safety',
+        to: '/doctor'
+    },
+    {
+        name: 'Sicknesses',
+        icon: 'sick',
+        to: '/sick'
+    },
+    {
+        name: 'Injuries',
+        icon: 'healing',
+        to: '/injury'
+    },
+    {
+        name: 'Calendar',
+        icon: 'calendar_month',
+        to: '/calendar'
+    },
+    {
+        name: 'Settings',
+        icon: 'settings',
+        to: '/settings'
+    },
+]
+
+function Card({ name }) {
+    const label = labels.find(item => item.name === name);
+
+    if (!label) return null;
 
     return (
         <div className='card'>
-            {children}
+            <Link to={label.to} class='cardLink'>
+                <span className="material-icons">
+                    {label.icon}
+                </span>
+                <span className='cardText'>
+                    {label.name}
+                </span>
+            </Link>
         </div>
     );
 }

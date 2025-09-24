@@ -6,7 +6,7 @@
 }
 
 header {
-    width: 30vw;
+    width: min-content;
     max-height: min-content;
     background-color: var(--raspberryPink);
     margin-inline: auto;
@@ -15,8 +15,8 @@ header {
     padding-inline: 15px;
     border-radius: 15px;
     border-style: solid;
-    border-color: var(--blueGrace);
-    border-width: 5px;
+    border-color: var(--darkCornflowerBlue);
+    border-width: 2.5px;
     text-align: center;
 }
 
