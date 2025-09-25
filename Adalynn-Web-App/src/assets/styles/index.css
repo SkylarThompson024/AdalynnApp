@@ -125,6 +125,42 @@ html, body {
   transition: transform 0.3s ease;
 }
 
+.slidePanel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 66vw;
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+  transform: translateX(100%); /* Start off-screen */
+  transition: transform 0.4s ease-in-out;
+  z-index: 1000;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.slidePanel.visible {
+  transform: translateX(0%); /* Slide into view */
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.panelContent {
+  margin-top: 3rem;
+}
+
 
 
 

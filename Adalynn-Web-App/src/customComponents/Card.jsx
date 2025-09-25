@@ -45,21 +45,20 @@ const labels = [
     },
 ]
 
-function Card({ name }) {
+function Card({ name, onClick }) {
     const label = labels.find(item => item.name === name);
-
     if (!label) return null;
 
     return (
-        <div className='card'>
-            <Link to={label.to} class='cardLink'>
+        <div className='card' onClick={onClick}>
+            <p className='cardLink'>
                 <span className="material-icons">
                     {label.icon}
                 </span>
                 <span className='cardText'>
                     {label.name}
                 </span>
-            </Link>
+            </p>
         </div>
     );
 }
