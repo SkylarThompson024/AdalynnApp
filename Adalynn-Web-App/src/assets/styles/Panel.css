@@ -1,0 +1,38 @@
+/* This is for styling the base slidePanel template. For styling specific slidePanels (Feedings, Sleeps, etc) look in /styles/Panels */
+/* The base components include the overall shape of the slidePanel, the movement of the slidePanel, and the close/back button */
+@font-face {
+    font-family: 'actionj';
+    src: url('../fonts/actionj.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.slidePanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  /* background: white; */
+  transform: translateX(100%); /* Start off-screen */
+  transition: transform 0.5s ease-in-out;
+  z-index: 1000;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 12px;
+  justify-items: center;
+}
+
+.slidePanel.visible {
+  transform: translateX(0%); /* Slide into view */
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 3rem;
+  margin-top: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

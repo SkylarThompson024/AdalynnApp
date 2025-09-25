@@ -1,0 +1,11 @@
+1. Modularize Panels
+    1.A. Feedings
+    1.B. Sleeps
+    1.C. Diaper Changes
+    1.D. Doctor Appts
+    1.E. Sicknesses
+    1.F. Injuries
+    1.G. Calendar
+    1.H. Settings
+
+2. 

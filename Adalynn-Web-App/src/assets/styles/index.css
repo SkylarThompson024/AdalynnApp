@@ -12,6 +12,7 @@
   --blueGrace: #6F9DE0;
   --darkCornflowerBlue: #496793;
   --blushPetal: #FFB6C1;
+  --testPink: #ff4d7f;
  
 }
 html, body {
@@ -64,6 +65,7 @@ html, body {
 }
 
 #rightSide {
+  position: relative;
   flex: 2;
   height: 95vh;
   background-image: linear-gradient(225deg, var(--mintyGreen), var(--blueGrace), var(--raspberryPink));
@@ -73,7 +75,7 @@ html, body {
   border-top-style: solid;
   border-bottom-style: solid;
   border-color: var(--darkCornflowerBlue);
-  border-width: 2px;
+  border-width: 2.5px;
 }
 
 .tabRow {
@@ -85,81 +87,7 @@ html, body {
   /* border: #e74646 2px solid; */
 }
 
-.card {
-  width: 40%;
-  height: 90%;
-  display: flex;
-  flex-direction: column;
-  /* margin: 15px; */
-  background-color: var(--blueGrace);
-  border-radius: 15px;
-  border-style: solid;
-  border-color: var(--darkCornflowerBlue);
-  border-width: 2.5px;
-  justify-content: space-evenly;
-}
 
-.cardLink {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: var(--raspberryPink);
-  text-shadow: var(--blushPetal) 3px 3px 4px;
-}
-
-.material-icons {
-  font-size: 5rem;
-  padding-bottom: 1rem;
-}
-
-.cardText {
-  font-family: actionj;
-  font-weight: bold;
-}
-
-.cardLink:hover {
-  transform: translateY(-15px);
-  transform: scale(1.125);
-  transition: transform 0.3s ease;
-}
-
-.slidePanel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 66vw;
-  height: 100%;
-  background: white;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
-  transform: translateX(100%); /* Start off-screen */
-  transition: transform 0.4s ease-in-out;
-  z-index: 1000;
-  padding: 1rem;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.slidePanel.visible {
-  transform: translateX(0%); /* Slide into view */
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.closeButton {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.panelContent {
-  margin-top: 3rem;
-}
 
 
 

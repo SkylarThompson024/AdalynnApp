@@ -1,19 +1,17 @@
 import Header from './views/partials/Header.jsx';
-import Footer from './views/partials/Footer.jsx';
-import NavBar from './views/partials/NavBar.jsx';
 import Card from './customComponents/Card.jsx';
 import Modal from 'react-modal';
 import { useState } from 'react';
+import './assets/styles/Panel.css';
+import './assets/styles/Panels/Feedings.css';
 
 Modal.setAppElement('#root');
 
 function SlidePanel({ visible, content, onClose }) {
   return (
     <div className={`slidePanel ${visible ? 'visible' : ''}`}>
-      <button className='closeButton' onClick={onClose}>X</button>
-      <div className='panelContent'>
-        {content}
-      </div>
+      <button className='closeButton' onClick={onClose}>{'\u2190'}</button> {/* {'\u2190'} is a left arrow - &lt; is < */}
+      {content}
     </div>
   )
 }
@@ -21,17 +19,40 @@ function SlidePanel({ visible, content, onClose }) {
 function App() {
   const [panelVisible, setPanelVisible] = useState(false);
   const [activePanel, setActivePanel] = useState('');
+  const [userDate, setUserDate] = useState('');
+  const [feedAmount, setFeedAmount] = useState('');
+  const [feedType, setFeedType] = useState('');
 
   const openPanel = (panelName) => {
-    setActivePanel(panelName);
-    setPanelVisible(true);
+    //Checks if there is a panel already on screen, then waits for it to slide off screen, then slides in the newly selected panel
+    //Also checks if selected panel is already on screen, if so, it breaks out and does nothing
+    
+    if (panelName !== activePanel) {
+      if (panelVisible) {
+      console.log(`Testing...`);
+      closePanel();
+      setTimeout(() => {
+        setActivePanel(panelName);
+        setPanelVisible(true);
+      }, 500);
+    } else {
+      setActivePanel(panelName);
+      setPanelVisible(true);
+    }
+    }
+    
+    
   };
   const closePanel = () => {
     setPanelVisible(false);
-    setTimeout(() => {
-      setActivePanel('');
-    }, 400);
+    setActivePanel('');
+    clearEverything();
   };
+  const clearEverything = () => {
+    setFeedAmount('');
+    setFeedType('');
+
+  }
 
 
 
@@ -64,9 +85,63 @@ function App() {
         onClose={closePanel}
         content={
           activePanel === 'Feedings' ? (
-            <div className='slidepanelContent'>
-              <div className='panelHeader'><h2>Feedings</h2></div>
-              <div className='panelBody'><p>Feedings content goes here.</p></div>
+            <div className='feedingsSlidePanelContent'>
+              <div className='feedingsPanelHeader'>
+                Feedings
+
+              </div>
+              <div className='feedingsPanelBody'>
+                <div className='feedingsNumberInput'>
+                  <p className='feedingsP'>How much did Adalynn eat?</p>
+                  <label>
+                    <input
+                      type='number'
+                      placeholder='Ex: 2.6oz'
+                      value={feedAmount}
+                      onChange={(e) => setFeedAmount(e.target.value)}
+                    />
+                  </label>
+                </div>
+                <p className='feedingsP'>What did Adalynn eat?</p>
+                <div className='feedingsRadioGroup'>
+                  <label>
+                    <input
+                      type="radio"
+                      value="Breastmilk"
+                      checked={feedType === "Breastmilk"}
+                      onChange={(e) => setFeedType(e.target.value)}
+                    />
+                    Breastmilk
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      value="Formula"
+                      checked={feedType === "Formula"}
+                      onChange={(e) => setFeedType(e.target.value)}
+                    />
+                    Formula
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      value="Straight from the Tap"
+                      checked={feedType === "Straight from the Tap"}
+                      onChange={(e) => setFeedType(e.target.value)}
+                    />
+                    From the Tap
+                  </label>
+                </div>
+                <p className='feedingsP'>What time and day did Adalynn eat?</p>
+                <div className='feedingsTimeGroup'>
+                  <input
+                    type="datetime-local"
+                    value={userDate}
+                    onChange={(e) => setUserDate(e.target.value)}
+                  />
+                </div>
+
+              </div>
             </div>
           ) : activePanel === 'Sleeps' ? (
             <div className='slidepanelContent'>

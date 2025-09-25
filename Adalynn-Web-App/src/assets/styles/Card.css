@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'actionj';
+    src: url('../fonts/actionj.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.card {
+  width: 40%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  /* margin: 15px; */
+  background-color: var(--blueGrace);
+  border-radius: 15px;
+  border-style: solid;
+  border-color: var(--darkCornflowerBlue);
+  border-width: 2.5px;
+  justify-content: space-evenly;
+  container-type: inline-size; /* Allows for card icons and text to be resized with window */
+  container-name: card; /* Allows for card icons and text to be resized with window */
+}
+
+@container card (width <= 110px) {
+  .material-icons {
+    font-size: 2rem;
+    padding-bottom: 0.5rem;
+    transition: font-size 0.3s ease;
+  }
+  .cardText {
+    font-family: actionj;
+    font-weight: bold;
+    font-size: 0.70rem;
+    transition: font-size 0.3s ease;
+  }
+}
+@container card (width > 110px) and (width < 135px) {
+  .material-icons {
+    font-size: 3rem;
+    padding-bottom: 0.75rem;
+    transition: font-size 0.3s ease;
+  }
+  .cardText {
+    font-family: actionj;
+    font-weight: bold;
+    font-size: 0.80rem;
+    transition: font-size 0.3s ease;
+  }
+}
+@container card (width >= 135px) {
+  .material-icons {
+    font-size: 4rem;
+    padding-bottom: 1rem;
+    transition: font-size 0.3s ease;
+  }
+  .cardText {
+    font-family: actionj;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: font-size 0.3s ease;
+  }
+}
+
+.cardLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--raspberryPink);
+  text-shadow: var(--blushPetal) 3px 3px 4px;
+}
+
+.cardLink:hover {
+  transform: scale(1.125) translateY(-10px);
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
