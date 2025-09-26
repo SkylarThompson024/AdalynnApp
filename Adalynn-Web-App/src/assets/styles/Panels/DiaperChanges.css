@@ -5,7 +5,7 @@
     font-style: normal;
 }
 
-.feedingsSlidePanelContent {
+.diaperSlidePanelContent {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -14,8 +14,8 @@
     align-items: center;
 }
 
-.feedingsPanelHeader {
-    max-width: min-content;
+.diaperPanelHeader {
+    max-width: max-content;
     max-height: min-content;
     flex: 1;
     background-color: var(--raspberryPink);
@@ -37,52 +37,40 @@
 }
 
 
-.feedingsPanelBody {
+.diaperPanelBody {
     background: linear-gradient(black, black) padding-box,
                 linear-gradient(135deg, var(--raspberryPink), var(--blueGrace), var(--mintyGreen)) border-box;
     border: 5px, solid, transparent;
     border-radius: 15px;
+    margin-top: 1%;
     padding-bottom: 1%;
+    width: 50%;
 }
-
-.feedingsNumberInput input[type="number"] {
-    background-color: var(--blueGrace);
-    border-radius: 4px;
-    border-width: 2.5px;
-    border-color: None;
-    border-style: None;
-    width: 35%;
-    margin-left: 5%;
-}
-.feedingsNumberInput label {
+.diaperIconsRow {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 2%;
+    padding-inline: 1%;
 }
-.feedingsRadioGroup input[type="radio"] {
-    accent-color: var(--blueGrace);
+.diaperIconsRow .card {
+
 }
-.feedingsRadioGroup label {
-    display: block;
-    color: white;
-    font-size: 1rem;
-    text-shadow: var(--blueGrace) 2px 2px 3px;
+.diaperTimeRow {
+    display: flex;
+    flex-direction: row;
+
 }
-.feedingsRadioGroup label:hover {
-    transform: scale(1.25) translateX(20px);
-    transition: transform 0.3s ease-in-out;
-}
-.feedingsTimeGroup input[type="datetime-local"] {
+.diaperPanelBody input[type="time"] {
     background-color: var(--blueGrace);
     border-radius: 4px;
     border-width: 2.5px;
     border-color: None;
     border-style: None;
-    width: min-content;
-    margin-left: 10%;
+    margin-left: 5%;
+    height: min-content;
 }
 
-
-.feedingsP {
+.diaperP {
     margin-left: 5%;
     color: white;
     text-shadow: var(--blueGrace) 2px 2px 3px;

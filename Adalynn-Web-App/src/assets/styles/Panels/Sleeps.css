@@ -5,7 +5,7 @@
     font-style: normal;
 }
 
-.feedingsSlidePanelContent {
+.sleepsSlidePanelContent {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -14,7 +14,7 @@
     align-items: center;
 }
 
-.feedingsPanelHeader {
+.sleepsPanelHeader {
     max-width: min-content;
     max-height: min-content;
     flex: 1;
@@ -37,41 +37,49 @@
 }
 
 
-.feedingsPanelBody {
+.sleepsPanelBody {
     background: linear-gradient(black, black) padding-box,
                 linear-gradient(135deg, var(--raspberryPink), var(--blueGrace), var(--mintyGreen)) border-box;
     border: 5px, solid, transparent;
     border-radius: 15px;
+    margin-top: 1%;
     padding-bottom: 1%;
 }
+.sleepsTimeRow {
+    display: flex;
+    flex-direction: row;
 
-.feedingsNumberInput input[type="number"] {
+}
+.sleepsTimeRow input[type="time"] {
     background-color: var(--blueGrace);
     border-radius: 4px;
     border-width: 2.5px;
     border-color: None;
     border-style: None;
-    width: 35%;
-    margin-left: 5%;
+    margin-left: auto;
+    margin-right: 40%;
+    height: min-content;
+    margin-top: auto;
+    margin-bottom: auto;
 }
-.feedingsNumberInput label {
+.sleepsNumberInput label {
     display: flex;
     flex-direction: column;
 }
-.feedingsRadioGroup input[type="radio"] {
+.sleepsRadioGroup input[type="radio"] {
     accent-color: var(--blueGrace);
 }
-.feedingsRadioGroup label {
+.sleepsRadioGroup label {
     display: block;
     color: white;
     font-size: 1rem;
     text-shadow: var(--blueGrace) 2px 2px 3px;
 }
-.feedingsRadioGroup label:hover {
+.sleepsRadioGroup label:hover {
     transform: scale(1.25) translateX(20px);
     transition: transform 0.3s ease-in-out;
 }
-.feedingsTimeGroup input[type="datetime-local"] {
+.sleepsTimeGroup input[type="datetime-local"] {
     background-color: var(--blueGrace);
     border-radius: 4px;
     border-width: 2.5px;
@@ -81,8 +89,7 @@
     margin-left: 10%;
 }
 
-
-.feedingsP {
+.sleepsP {
     margin-left: 5%;
     color: white;
     text-shadow: var(--blueGrace) 2px 2px 3px;

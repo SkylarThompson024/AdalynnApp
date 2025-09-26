@@ -4,6 +4,9 @@ import Modal from 'react-modal';
 import { useState } from 'react';
 import './assets/styles/Panel.css';
 import './assets/styles/Panels/Feedings.css';
+import './assets/styles/Panels/Sleeps.css';
+import './assets/styles/Panels/DiaperChanges.css';
+import './assets/styles/Panels/DoctorAppts.css';
 
 Modal.setAppElement('#root');
 
@@ -22,6 +25,18 @@ function App() {
   const [userDate, setUserDate] = useState('');
   const [feedAmount, setFeedAmount] = useState('');
   const [feedType, setFeedType] = useState('');
+  const [fromTime, setFromTime] = useState('');
+  const [toTime, setToTime] = useState('');
+  const [totalSleep, setTotalSleep] = useState('');
+  const [diaperType, setDiaperType] = useState('');
+  const [diaperTime, setDiaperTime] = useState('');
+  const [doctorNotes, setDoctorNotes] = useState('');
+  const [sickNotes, setSickNotes] = useState('');
+  const [injuryNotes, setInjuryNotes] = useState('');
+
+  const playSound = (soundName) => {
+    console.log(soundName);
+  }
 
   const openPanel = (panelName) => {
     //Checks if there is a panel already on screen, then waits for it to slide off screen, then slides in the newly selected panel
@@ -51,6 +66,11 @@ function App() {
   const clearEverything = () => {
     setFeedAmount('');
     setFeedType('');
+    setFromTime('');
+    setToTime('');
+    setTotalSleep('');
+    setDiaperType('');
+    setDiaperTime('');
 
   }
 
@@ -144,44 +164,110 @@ function App() {
               </div>
             </div>
           ) : activePanel === 'Sleeps' ? (
-            <div className='slidepanelContent'>
-              <div className='panelHeader'><h2>Sleeps</h2></div>
-              <div className='panelBody'><p>Sleeps content goes here.</p></div>
+            <div className='sleepsSlidepanelContent'>
+              <div className='sleepsPanelHeader'>
+                Sleeps
+              </div>
+              <div className='sleepsPanelBody'>
+                <p className='sleepsP'>How long did Adalynn sleep?</p>
+                <div className='sleepsTimeRow'>
+                  <p className='sleepsP'>From: </p>
+                  <input
+                    type='time'
+                    value={fromTime}
+                    onChange={(e) => setFromTime(e.target.value)}
+                  />
+                </div>
+                <div className='sleepsTimeRow'>
+                  <p className='sleepsP'>To: </p>
+                  <input
+                    type='time'
+                    value={toTime}
+                    onChange={(e) => setToTime(e.target.value)}
+                  />
+                </div>
+                <p className='sleepsP'>Total: {totalSleep}</p>
+
+              </div>
             </div>
           ) :  activePanel === 'Diaper Change' ? (
-            <div className='slidepanelContent'>
-              <div className='panelHeader'><h2>Diaper Change</h2></div>
-              <div className='panelBody'><p>Diaper Change content goes here.</p></div>
+            <div className='diaperSlidePanelContent'>
+              <div className='diaperPanelHeader'>
+                Diaper Change
+              </div>
+              <div className='diaperPanelBody'>
+                <p className='diaperP'>What type of diaper change was it?</p>
+                <div className='diaperIconsRow'>
+                  <Card name='Wet' onClick={(e) => {playSound(e.target.name); setDiaperType('Wet')}}/>
+                  <Card name='Solid' onClick={(e) => {playSound(e.target.name); setDiaperType('Solid')}}/>
+                  <Card name='Both' onClick={(e) => {playSound(e.target.name); setDiaperType('Both')}}/>
+                  <Card name='Blowout' onClick={(e) => {playSound(e.target.name); setDiaperType('Blowout')}}/>
+                </div>
+                <p className='diaperP'>What time was the diaper changed?</p>
+                <input
+                  type='time'
+                  value={diaperTime}
+                  onChange={(e) => setDiaperTime(e.target.value)}
+                />
+              </div>
             </div>
           ) :  activePanel === 'Doctor Appts' ? (
-            <div className='slidepanelContent'>
-              <div className='panelHeader'><h2>Doctor Appts</h2></div>
-              <div className='panelBody'><p>Doctor Appts content goes here.</p></div>
-            </div>
-          ) :  activePanel === 'Diaper Change' ? (
-            <div className='slidepanelContent'>
-              <div className='panelHeader'><h2>Diaper Change</h2></div>
-              <div className='panelBody'><p>Diaper Change content goes here.</p></div>
+            <div className='doctorSlidePanelContent'>
+              <div className='doctorPanelHeader'>
+                Doctor Appts
+              </div>
+              <div className='doctorPanelBody'>
+                <p className='doctorP'>What is the Doctor's Appointment for?</p>
+                <input
+                  type='text'
+                  placeholder='Start typing here...'
+                  value={doctorNotes}
+                  onChange={(e) => setDoctorNotes(e.target.value)}
+                />
+                <p className='doctorP'>What time and day is the appointment for?</p>
+                <input
+                  type='datetime-local'
+                  value={userDate}
+                  onChange={(e) => setUserDate(e.target.value)}
+                />
+              </div>
             </div>
           ) :  activePanel === 'Sicknesses' ? (
             <div className='slidepanelContent'>
-              <div className='panelHeader'><h2>Sicknesses</h2></div>
-              <div className='panelBody'><p>Sicknesses content goes here.</p></div>
+              <div className='panelHeader'>
+                Sicknesses
+              </div>
+              <div className='panelBody'>
+                <p>Sicknesses content goes here.</p>
+              </div>
             </div>
           ) :  activePanel === 'Injuries' ? (
             <div className='slidepanelContent'>
-              <div className='panelHeader'><h2>Injuries</h2></div>
-              <div className='panelBody'><p>Injuries content goes here.</p></div>
+              <div className='panelHeader'>
+                Injuries
+
+              </div>
+              <div className='panelBody'>
+                <p>Injuries content goes here.</p>
+              </div>
             </div>
           ) :  activePanel === 'Calendar' ? (
             <div className='slidepanelContent'>
-              <div className='panelHeader'><h2>Calendar</h2></div>
-              <div className='panelBody'><p>Calendar content goes here.</p></div>
+              <div className='panelHeader'>
+                Calendar
+              </div>
+              <div className='panelBody'>
+                <p>Calendar content goes here.</p>
+              </div>
             </div>
           ) :  activePanel === 'Settings' ? (
             <div className='slidepanelContent'>
-              <div className='panelHeader'><h2>Settings</h2></div>
-              <div className='panelBody'><p>Settings content goes here.</p></div>
+              <div className='panelHeader'>
+                Settings
+              </div>
+              <div className='panelBody'>
+                <p>Settings content goes here.</p>
+              </div>
             </div>
           ) : null
         }

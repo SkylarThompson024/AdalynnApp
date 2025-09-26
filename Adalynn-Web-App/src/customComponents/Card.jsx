@@ -43,6 +43,26 @@ const labels = [
         icon: 'settings',
         to: '/settings'
     },
+    {
+        name: 'Wet',
+        icon: 'water_drop',
+        to: '/'
+    },
+    {
+        name: 'Solid',
+        icon: 'poop',
+        to: '/'
+    },
+    {
+        name: 'Both',
+        icon: '2x',
+        to: '/'
+    },
+    {
+        name: 'Blowout',
+        icon: 'bomb',
+        to: '/'
+    },
 ]
 
 function Card({ name, onClick }) {
