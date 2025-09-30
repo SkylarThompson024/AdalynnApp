@@ -27,3 +27,29 @@ text {
     text-shadow: black 2px 3px 3px;
 
 }
+
+@media (max-width: 450px) {
+    header {
+        width: min-content;
+        height: min-content;
+        background-color: var(--raspberryPink);
+        margin-top: 1.5rem;
+        margin-inline: auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-inline: 15px;
+        border-radius: 15px;
+        border-style: solid;
+        border-color: var(--darkCornflowerBlue);
+        border-width: 2.5px;
+        text-align: center;
+    }
+
+    text {
+        color: white;
+        font-family: 'actionj';
+        font-size: 80px;
+        text-shadow: black 2px 3px 3px;
+
+    }
+}

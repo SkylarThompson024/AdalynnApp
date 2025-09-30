@@ -35,4 +35,61 @@
   background: none;
   border: none;
   cursor: pointer;
+  font-family: 'Roboto';
+}
+.addButton {
+  position: absolute;
+  top: 1rem;
+  left: 7rem;
+  font-size: 3rem;
+  margin-top: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Roboto';
+}
+
+@media (max-width: 450px) {
+  .slidePanel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(225deg, var(--raspberryPink), var(--blueGrace), var(--mintyGreen));
+    transform: translateY(100%); /* Start off-screen */
+    transition: transform 0.5s ease-in-out;
+    z-index: 1000;
+    border-radius: 0rem;
+    justify-items: center;
+  }
+
+  .slidePanel.visible {
+    transform: translateY(0%); /* Slide into view */
+  }
+
+  .closeButton {
+    position: absolute;
+    top: 0.75%;
+    left: 0.75%;
+    color: black;
+    font-size: 3rem;
+    margin-top: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Roboto';
+  }
+  .addButton {
+    position: absolute;
+    top: 1.20%;
+    left: 87%;
+    color: black;
+    font-size: 3rem;
+    margin-top: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Roboto';
+  }
 }

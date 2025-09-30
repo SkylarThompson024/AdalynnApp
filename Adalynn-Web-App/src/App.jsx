@@ -7,13 +7,18 @@ import './assets/styles/Panels/Feedings.css';
 import './assets/styles/Panels/Sleeps.css';
 import './assets/styles/Panels/DiaperChanges.css';
 import './assets/styles/Panels/DoctorAppts.css';
+import './assets/styles/Panels/Sicknesses.css';
+import './assets/styles/Panels/Injuries.css';
+import './assets/styles/Panels/Calendar.css';
+import './assets/styles/Panels/Settings.css';
 
 Modal.setAppElement('#root');
 
-function SlidePanel({ visible, content, onClose }) {
+function SlidePanel({ visible, content, onClose, onAdd }) {
   return (
     <div className={`slidePanel ${visible ? 'visible' : ''}`}>
       <button className='closeButton' onClick={onClose}>{'\u2190'}</button> {/* {'\u2190'} is a left arrow - &lt; is < */}
+      <button className='addButton' onClick={onAdd}>+</button> 
       {content}
     </div>
   )
@@ -34,10 +39,12 @@ function App() {
   const [sickNotes, setSickNotes] = useState('');
   const [injuryNotes, setInjuryNotes] = useState('');
 
+  const handleAdd = (activePanel) => {
+    setActivePanel(activePanel); //Does nothing right now
+  }
   const playSound = (soundName) => {
     console.log(soundName);
   }
-
   const openPanel = (panelName) => {
     //Checks if there is a panel already on screen, then waits for it to slide off screen, then slides in the newly selected panel
     //Also checks if selected panel is already on screen, if so, it breaks out and does nothing
@@ -71,6 +78,9 @@ function App() {
     setTotalSleep('');
     setDiaperType('');
     setDiaperTime('');
+    setDoctorNotes('');
+    setSickNotes('');
+    setInjuryNotes('');
 
   }
 
@@ -103,6 +113,7 @@ function App() {
       <SlidePanel
         visible={panelVisible}
         onClose={closePanel}
+        onAdd={handleAdd}
         content={
           activePanel === 'Feedings' ? (
             <div className='feedingsSlidePanelContent'>
@@ -233,22 +244,45 @@ function App() {
               </div>
             </div>
           ) :  activePanel === 'Sicknesses' ? (
-            <div className='slidepanelContent'>
-              <div className='panelHeader'>
+            <div className='sickSlidePanelContent'>
+              <div className='sickPanelHeader'>
                 Sicknesses
               </div>
-              <div className='panelBody'>
-                <p>Sicknesses content goes here.</p>
+              <div className='sickPanelBody'>
+                <p className='sickP'>What happened with Adalynn?</p>
+                <input
+                  type='text'
+                  placeholder='Start typing here...'
+                  value={sickNotes}
+                  onChange={(e) => setSickNotes(e.target.value)}
+                />
+                <p className='sickP'>What time and day did this happen?</p>
+                <input
+                  type='datetime-local'
+                  value={userDate}
+                  onChange={(e) => setUserDate(e.target.value)}
+                />
               </div>
             </div>
           ) :  activePanel === 'Injuries' ? (
-            <div className='slidepanelContent'>
-              <div className='panelHeader'>
+            <div className='injurySlidePanelContent'>
+              <div className='injuryPanelHeader'>
                 Injuries
-
               </div>
-              <div className='panelBody'>
-                <p>Injuries content goes here.</p>
+              <div className='injuryPanelBody'>
+                <p className='injuryP'>What happen to Adalynn?</p>
+                <input
+                  type='text'
+                  placeholder='Start typing here...'
+                  value={injuryNotes}
+                  onChange={(e) => setInjuryNotes(e.target.value)}
+                />
+                <p className='sickP'>What time and day did this happen?</p>
+                <input
+                  type='datetime-local'
+                  value={userDate}
+                  onChange={(e) => setUserDate(e.target.value)}
+                />
               </div>
             </div>
           ) :  activePanel === 'Calendar' ? (

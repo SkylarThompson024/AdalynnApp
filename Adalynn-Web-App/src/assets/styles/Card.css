@@ -76,3 +76,21 @@
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
 }
+
+@media (max-width: 450px) {
+  .card {
+    width: 42%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* margin: 15px; */
+    background-color: var(--blueGrace);
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--darkCornflowerBlue);
+    border-width: 2.5px;
+    justify-content: space-evenly;
+    container-type: inline-size; /* Allows for card icons and text to be resized with window */
+    container-name: card; /* Allows for card icons and text to be resized with window */
+  }
+}

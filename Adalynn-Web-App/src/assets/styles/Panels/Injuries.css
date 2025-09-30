@@ -5,7 +5,7 @@
     font-style: normal;
 }
 
-.doctorSlidePanelContent {
+.injurySlidePanelContent {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -14,7 +14,7 @@
     align-items: center;
 }
 
-.doctorPanelHeader {
+.injuryPanelHeader {
     max-width: max-content;
     max-height: min-content;
     flex: 1;
@@ -36,7 +36,7 @@
     text-shadow: black 2px 3px 3px;
 }
 
-.doctorPanelBody {
+.injuryPanelBody {
     background: linear-gradient(black, black) padding-box,
                 linear-gradient(135deg, var(--raspberryPink), var(--blueGrace), var(--mintyGreen)) border-box;
     border: 5px, solid, transparent;
@@ -46,18 +46,18 @@
     width: 50%;
     height: 25%;
 }
-.doctorIconsRow {
+.injuryIconsRow {
     display: flex;
     flex-direction: row;
     gap: 2%;
     padding-inline: 1%;
 }
-.doctorTimeRow {
+.injuryTimeRow {
     display: flex;
     flex-direction: row;
 
 }
-.doctorPanelBody input[type="text"]{
+.injuryPanelBody input[type="text"]{
     background-color: var(--blueGrace);
     border-radius: 4px;
     border-width: 2.5px;
@@ -68,7 +68,7 @@
     height: 50%;
 
 }
-.doctorPanelBody input[type="datetime-local"] {
+.injuryPanelBody input[type="datetime-local"] {
     background-color: var(--blueGrace);
     border-radius: 4px;
     border-width: 2.5px;
@@ -78,7 +78,7 @@
     height: min-content;
 }
 
-.doctorP {
+.injuryP {
     margin-left: 5%;
     color: white;
     text-shadow: var(--blueGrace) 2px 2px 3px;
