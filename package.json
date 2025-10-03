@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "start": "node backend/index.js"
+    "start": "node ./backend/index.js"
   },
   "dependencies": {
     "buffer": "^6.0.3",

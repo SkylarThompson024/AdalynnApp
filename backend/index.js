@@ -14,7 +14,9 @@ app.use(express.json());
 const upload = multer({ storage: multer.memoryStorage() }); 
 
 
+// eslint-disable-next-line no-undef
 const uri = process.env.ATLAS_URI;
+// eslint-disable-next-line no-undef
 const port = process.env.PORT;
 if (!uri) {
     throw new Error('Missing ATLAS_URI in environment variables');
