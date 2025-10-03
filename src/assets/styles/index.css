@@ -19,7 +19,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  background-image: linear-gradient(135deg, var(--mintyGreen), var(--blueGrace), var(--raspberryPink));
   height: 100%;
   width: 100%;
 }

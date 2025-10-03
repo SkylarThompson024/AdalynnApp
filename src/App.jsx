@@ -1,7 +1,7 @@
 import Header from './views/partials/Header.jsx';
 import Card from './customComponents/Card.jsx';
 import Modal from 'react-modal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './assets/styles/Panel.css';
 import './assets/styles/Panels/Feedings.css';
 import './assets/styles/Panels/Sleeps.css';
@@ -38,6 +38,15 @@ function App() {
   const [doctorNotes, setDoctorNotes] = useState('');
   const [sickNotes, setSickNotes] = useState('');
   const [injuryNotes, setInjuryNotes] = useState('');
+
+  const [feedEntries, setFeedEntries] = useState([])
+
+  useEffect(() => {
+    fetch('https://https://adalynnapp.onrender.com/api/feed')
+      .then(res => res.json())
+      .then(data => setFeedEntries(data))
+      .catch(err => console.log('Error fetching feed: ', err))
+  }, [])
 
   const handleAdd = (activePanel) => {
     setActivePanel(activePanel); //Does nothing right now
@@ -170,6 +179,9 @@ function App() {
                     value={userDate}
                     onChange={(e) => setUserDate(e.target.value)}
                   />
+                </div>
+                <div>
+                  {feedEntries}
                 </div>
 
               </div>

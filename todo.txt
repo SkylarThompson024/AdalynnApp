@@ -8,4 +8,4 @@
     1.G. Calendar
     1.H. Settings
 
-2. 
+2. Setup API backend with Render? (Free tier)
