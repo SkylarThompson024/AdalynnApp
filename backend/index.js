@@ -401,12 +401,6 @@ app.post('/picture', upload.single('photo'), async (req, res) => {
 });
 
 
-// const formatDate = (date) => {
-//     const d = new Date(date);
-//     return d.toISOString().split('T')[0];
-// };
-
-
 //Port listener
 app.listen(port, '0.0.0.0', () => {
     console.log(`Server running on port ${port}`);
