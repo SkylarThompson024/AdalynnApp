@@ -1,10 +1,12 @@
-require('dotenv').config({ path: './config.env' })
-const express = require('express');
-const cors = require('cors');
-const multer = require('multer'); //To handle pictures fetching and posting
-const { MongoClient, ObjectId } = require("mongodb");
-const { Buffer } = require('buffer');
+import dotenv from 'dotenv'
+import express from 'express';
+import cors from 'cors';
+import multer from 'multer'; //To handle pictures fetching and posting
+import { MongoClient, ObjectId } from "mongodb";
+import { Buffer } from 'buffer';
 // const e = require('express');
+
+dotenv.config({ path: './config.env' })
 
 const app = express();
 app.use(cors());
