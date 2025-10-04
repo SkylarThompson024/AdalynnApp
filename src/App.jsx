@@ -142,69 +142,71 @@ function App() {
 
               </div>
               <div className='feedingsPanelBody'>
-                <div className='feedingsNumberInput'>
-                  <p className='feedingsP'>How much did Adalynn eat?</p>
-                  <label>
+                <div className='feedingsAddSection'>
+                  <div className='feedingsNumberInput'>
+                    <p className='feedingsP'>How much did Adalynn eat?</p>
+                    <label>
+                      <input
+                        type='number'
+                        placeholder='Ex: 2.6oz'
+                        value={feedAmount}
+                        onChange={(e) => setFeedAmount(e.target.value)}
+                      />
+                    </label>
+                  </div>
+                  <p className='feedingsP'>What did Adalynn eat?</p>
+                  <div className='feedingsRadioGroup'>
+                    <label>
+                      <input
+                        type="radio"
+                        value="Breastmilk"
+                        checked={feedType === "Breastmilk"}
+                        onChange={(e) => setFeedType(e.target.value)}
+                      />
+                      Breastmilk
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        value="Formula"
+                        checked={feedType === "Formula"}
+                        onChange={(e) => setFeedType(e.target.value)}
+                      />
+                      Formula
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        value="Straight from the Tap"
+                        checked={feedType === "Straight from the Tap"}
+                        onChange={(e) => setFeedType(e.target.value)}
+                      />
+                      From the Tap
+                    </label>
+                  </div>
+                  <p className='feedingsP'>What time and day did Adalynn eat?</p>
+                  <div className='feedingsTimeGroup'>
                     <input
-                      type='number'
-                      placeholder='Ex: 2.6oz'
-                      value={feedAmount}
-                      onChange={(e) => setFeedAmount(e.target.value)}
+                      type="datetime-local"
+                      value={userDate}
+                      onChange={(e) => setUserDate(e.target.value)}
                     />
-                  </label>
+                  </div>
                 </div>
-                <p className='feedingsP'>What did Adalynn eat?</p>
-                <div className='feedingsRadioGroup'>
-                  <label>
-                    <input
-                      type="radio"
-                      value="Breastmilk"
-                      checked={feedType === "Breastmilk"}
-                      onChange={(e) => setFeedType(e.target.value)}
-                    />
-                    Breastmilk
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      value="Formula"
-                      checked={feedType === "Formula"}
-                      onChange={(e) => setFeedType(e.target.value)}
-                    />
-                    Formula
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      value="Straight from the Tap"
-                      checked={feedType === "Straight from the Tap"}
-                      onChange={(e) => setFeedType(e.target.value)}
-                    />
-                    From the Tap
-                  </label>
-                </div>
-                <p className='feedingsP'>What time and day did Adalynn eat?</p>
-                <div className='feedingsTimeGroup'>
-                  <input
-                    type="datetime-local"
-                    value={userDate}
-                    onChange={(e) => setUserDate(e.target.value)}
-                  />
-                </div>
-                <div className='feedEntryList'>
+
+                <div className='feedingsEntryList'>
                   {feedEntries.length === 0 ? (
                     <p className='feedingsP'>No Feedings logged yet...</p>
                   ) : (
                     <ul>
                       {feedEntries.map(entry => (
                         <li key={entry._id} className='feedingsEntryItem'>
-                          <strong>{entry.time}</strong> - {entry.amount} oz of {entry.type} by {entry.guardian} on {new Date(entry.date).toLocaleDateString()}
+                          <strong>{entry.time}</strong> - {entry.amount} oz of {entry.type} by {entry.guardian} on {entry.date} {/* Replace entry.date with new Date(entry.date).toLocaleDateString() */}
                         </li>
                       ))}
                     </ul>
                   )}
                 </div>
-
               </div>
             </div>
           ) : activePanel === 'Sleeps' ? (
