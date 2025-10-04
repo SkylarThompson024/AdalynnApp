@@ -11,6 +11,10 @@ import './assets/styles/Panels/Sicknesses.css';
 import './assets/styles/Panels/Injuries.css';
 import './assets/styles/Panels/Calendar.css';
 import './assets/styles/Panels/Settings.css';
+import {
+  fetchFeedEntries,
+} from '../backend/databaseInteractions.js';
+
 
 Modal.setAppElement('#root');
 
@@ -39,7 +43,7 @@ function App() {
   const [sickNotes, setSickNotes] = useState('');
   const [injuryNotes, setInjuryNotes] = useState('');
 
-  const [feedEntries, setFeedEntries] = useState([])
+  const [feedEntries, setFeedEntries] = useState([]);
 
   useEffect(() => {
     fetch('https://https://adalynnapp.onrender.com/api/feed')
@@ -54,13 +58,18 @@ function App() {
   const playSound = (soundName) => {
     console.log(soundName);
   }
-  const openPanel = (panelName) => {
+  const handlePanelContent =  async (panelName) => {
+    if (panelName === "Feedings") {
+      const entries = await fetchFeedEntries()
+      setFeedEntries(entries)
+    }
+  }
+  const openPanel = async (panelName) => {
     //Checks if there is a panel already on screen, then waits for it to slide off screen, then slides in the newly selected panel
     //Also checks if selected panel is already on screen, if so, it breaks out and does nothing
     
     if (panelName !== activePanel) {
       if (panelVisible) {
-      console.log(`Testing...`);
       closePanel();
       setTimeout(() => {
         setActivePanel(panelName);
@@ -69,6 +78,8 @@ function App() {
     } else {
       setActivePanel(panelName);
       setPanelVisible(true);
+      handlePanelContent(panelName);
+
     }
     }
     
@@ -180,8 +191,18 @@ function App() {
                     onChange={(e) => setUserDate(e.target.value)}
                   />
                 </div>
-                <div>
-                  {feedEntries}
+                <div className='feedEntryList'>
+                  {feedEntries.length === 0 ? (
+                    <p className='feedingsP'>No Feedings logged yet...</p>
+                  ) : (
+                    <ul>
+                      {feedEntries.map(entry => (
+                        <li key={entry._id} className='feedingsEntryItem'>
+                          <strong>{entry.time}</strong> - {entry.amount} oz of {entry.type} by {entry.guardian} on {new Date(entry.date).toLocaleDateString()}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
 
               </div>
