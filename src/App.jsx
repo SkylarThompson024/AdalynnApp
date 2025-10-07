@@ -1,7 +1,7 @@
 import Header from './views/partials/Header.jsx';
 import Card from './customComponents/Card.jsx';
 import Modal from 'react-modal';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './assets/styles/Panel.css';
 import './assets/styles/Panels/Feedings.css';
 import './assets/styles/Panels/Sleeps.css';
@@ -16,6 +16,8 @@ import {
   fetchSleepEntries,
 } from '../backend/databaseInteractions.js';
 import ConnectionIndicator from './customComponents/ConnectionIndicator.jsx';
+import WeeklyCalendar from './customComponents/weeklyCalendar.jsx';
+import WeekC from './customComponents/WeekC.jsx';
 
 
 Modal.setAppElement('#root');
@@ -149,6 +151,7 @@ function App() {
                 Feedings
 
               </div>
+              <WeekC todayDate={new Date('Tue Oct 28 2025 18:37:12 GMT-0400 (Eastern Daylight Time')} /> {/* Replace new Date(...) with new Date(Date.now()) when testing is finished */}
               <div className='feedingsPanelBody'>
                 <div className='feedingsAddSection'>
                   <div className='feedingsNumberInput'>
