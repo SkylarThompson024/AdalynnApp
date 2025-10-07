@@ -29,6 +29,10 @@ const dbName = 'AdalynnDatabase';
 
 
 //GET Routes
+app.get('/ping', (req, res) => {        //For pinging the Render server periodically to indicate to the user if the connection is active or not
+    res.status(200).json({ ok: true});
+});
+
 app.get('/', (req, res) => {
     res.send('Hello from Express');
 });

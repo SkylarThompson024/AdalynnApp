@@ -8,7 +8,7 @@ import type {
     PictureEntry,
 } from "../src/assets/constants";
 
-const BASE_URL = 'https://adalynnapp1.onrender.com'
+const BASE_URL = 'https://adalynnapp1.onrender.com/'
 
 const fetchFeedEntries = async (): Promise<FeedEntry[]> => {
     try {

@@ -9,3 +9,5 @@
     1.H. Settings
 
 2. Setup API backend with Render? (Free tier)
+3. Remove all instances of links or other potientially sensitive information to the 'config.env' file and import them as variables when needed
+4.

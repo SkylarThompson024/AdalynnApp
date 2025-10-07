@@ -13,7 +13,9 @@ import './assets/styles/Panels/Calendar.css';
 import './assets/styles/Panels/Settings.css';
 import {
   fetchFeedEntries,
+  fetchSleepEntries,
 } from '../backend/databaseInteractions.js';
+import ConnectionIndicator from './customComponents/ConnectionIndicator.jsx';
 
 
 Modal.setAppElement('#root');
@@ -44,13 +46,8 @@ function App() {
   const [injuryNotes, setInjuryNotes] = useState('');
 
   const [feedEntries, setFeedEntries] = useState([]);
+  const [sleepEntries, setSleepEntries] = useState([]);
 
-  useEffect(() => {
-    fetch('https://https://adalynnapp.onrender.com/api/feed')
-      .then(res => res.json())
-      .then(data => setFeedEntries(data))
-      .catch(err => console.log('Error fetching feed: ', err))
-  }, [])
 
   const handleAdd = (activePanel) => {
     setActivePanel(activePanel); //Does nothing right now
@@ -63,7 +60,16 @@ function App() {
       const entries = await fetchFeedEntries()
       setFeedEntries(entries)
     }
+    if (panelName === "Sleeps") {
+      const entries = await fetchSleepEntries()
+      setSleepEntries(entries)
+    }
   }
+  const handleCardClick = (panelName) => {
+    openPanel(panelName);
+    handlePanelContent(panelName);
+  }
+
   const openPanel = async (panelName) => {
     //Checks if there is a panel already on screen, then waits for it to slide off screen, then slides in the newly selected panel
     //Also checks if selected panel is already on screen, if so, it breaks out and does nothing
@@ -101,6 +107,7 @@ function App() {
     setDoctorNotes('');
     setSickNotes('');
     setInjuryNotes('');
+    setUserDate('');
 
   }
 
@@ -110,10 +117,11 @@ function App() {
     <div id='wrapper'>
       <section id='leftSide'>
         <Header/>
+        <ConnectionIndicator/>
         <section id='tabsContainer'>
           <div className='tabRow'>
-            <Card name='Feedings' onClick={() => openPanel('Feedings')}/>
-            <Card name='Sleeps' onClick={() => openPanel('Sleeps')}/>
+            <Card name='Feedings' onClick={() => handleCardClick('Feedings')}/>
+            <Card name='Sleeps' onClick={() => handleCardClick('Sleeps')}/>
           </div>
           <div className='tabRow'>
             <Card name='Diaper Change' onClick={() => openPanel('Diaper Change')}/>
@@ -201,7 +209,7 @@ function App() {
                     <ul>
                       {feedEntries.map(entry => (
                         <li key={entry._id} className='feedingsEntryItem'>
-                          <strong>{entry.time}</strong> - {entry.amount} oz of {entry.type} by {entry.guardian} on {entry.date} {/* Replace entry.date with new Date(entry.date).toLocaleDateString() */}
+                          <strong>{entry.date}</strong> - {entry.amount} oz of {entry.type} by {entry.guardian} on {entry.time} {/* Replace entry.date with new Date(entry.date).toLocaleDateString() */}
                         </li>
                       ))}
                     </ul>
@@ -233,6 +241,13 @@ function App() {
                   />
                 </div>
                 <p className='sleepsP'>Total: {totalSleep}</p>
+                <ul>
+                      {sleepEntries.map(entry => (
+                        <li key={entry._id} className='feedingsEntryItem'> {/* Change to sleepsEntryItem */}
+                          <strong>{entry.time}</strong> - {entry.amount} oz of {entry.type} by {entry.guardian} on {entry.date} {/* Replace entry.date with new Date(entry.date).toLocaleDateString() */}
+                        </li>
+                      ))}
+                    </ul>
 
               </div>
             </div>
