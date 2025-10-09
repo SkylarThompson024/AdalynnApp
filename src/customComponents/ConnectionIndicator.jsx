@@ -13,7 +13,8 @@ export default function ConnectionIndicator() {
             fontSize: '0.9rem',
             transition: 'background-color 0.3s ease',
             marginTop: '0.5rem',
-            textAlign: 'center'
+            textAlign: 'center',
+            marginInline: '1rem',
         }}>
             {isConnected ? 'Connected to server' : 'Offline - changes will not sync'}
         </div>

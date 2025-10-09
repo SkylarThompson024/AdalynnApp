@@ -2,7 +2,6 @@ import React from 'react';
 import '../assets/styles/WeeklyCalendar.css';
 
 const WeekC = ({ todayDate }) => {
-    console.log(`todayDate: ${todayDate}`);
     const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const daysAgo = (24 * 60 * 60 * 1000);
 
@@ -17,18 +16,9 @@ const WeekC = ({ todayDate }) => {
         return dates;
     };
 
-    
-
     const dayOfTheWeek = new Date(todayDate).getDay();
-    console.log(`DayOfTheWeek: ${dayOfTheWeek}`)
-
     const startDate = (new Date(todayDate - dayOfTheWeek * daysAgo)).toDateString();
-    console.log(`startDate: ${startDate}`)
-
     const weekDates = getWeekDates(startDate);
-    console.log(`weekDates: ${weekDates}`)
-
-
 
     return (
         <div className='week-viewer'>

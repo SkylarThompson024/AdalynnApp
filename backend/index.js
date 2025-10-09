@@ -162,7 +162,12 @@ app.get('/picture/:id/image', async (req, res) => {
 app.post('/feed', async (req, res) => {
     try {
         const { amount, date, guardian, type, time } = req.body;
-
+        console.log(`Amount: ${amount}`);
+        console.log(`Date: ${date}`);
+        console.log(`Guardian: ${guardian}`);
+        console.log(`Type: ${type}`);
+        console.log(`Time: ${time}`);
+        
         //Basic Validation
         if (
             typeof amount !== 'number' ||
@@ -173,6 +178,7 @@ app.post('/feed', async (req, res) => {
         ) {
             return res.status(400).json({ error: 'Invalid input format' })
         }
+        
 
         await client.connect();
         const db = client.db(dbName);

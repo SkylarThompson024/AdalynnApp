@@ -7,13 +7,13 @@
 
 
 :root {
-  /* Global Colors */
-  --raspberryPink: #E74689;
-  --mintyGreen: #46E7AC;
-  --blueGrace: #6F9DE0;
-  --darkCornflowerBlue: #496793;
-  --blushPetal: #FFB6C1;
-  --testPink: #ff4d7f;
+  /* Global Colors */         /* None of these RGB values are correct anymore (Need to fix)*/
+  --raspberryPink: #E74689; /* RGB = 231, 70, 89 */
+  --mintyGreen: #46E7AC; /* RGB = 70, 231, 172 */
+  --blueGrace: #6f9de0; /* RGB = 111, 157, 224 */
+  --darkCornflowerBlue: #496793; /* RGB = 73, 103, 147 */
+  --blushPetal: #FFB6C1; /* RGB = 255, 182, 193 */
+  --testPink: #ff4d7f; /* RGB = 255, 77, 127 */
  
 }
 html, body {
@@ -86,6 +86,21 @@ html, body {
   height: 22%;
   /* border: #e74646 2px solid; */
 }
+
+/* .addPanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  transform: translateX(100%);
+  transition: tranform 0.5s ease-in-out;
+  z-index: 1001;
+}
+.addPanel.visible {
+  transform: translateX(0%);
+} */
 
 @media (max-width: 430px) {
   html, body {

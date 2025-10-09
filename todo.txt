@@ -1,4 +1,4 @@
-1. Modularize Panels
+1. Modularize Panels?
     1.A. Feedings
     1.B. Sleeps
     1.C. Diaper Changes
@@ -7,7 +7,35 @@
     1.F. Injuries
     1.G. Calendar
     1.H. Settings
-
-2. Setup API backend with Render? (Free tier)
-3. Remove all instances of links or other potientially sensitive information to the 'config.env' file and import them as variables when needed
-4.
+✓ 2. Setup API backend with Render? (Free tier)
+3. Remove all instances of links or other potientially sensitive information and move them to the 'config.env' file and import them as variables when needed
+4. Change Back and Add buttons on Panel to something that describes exactly what they do but better. Like adding small words under the symbols
+5. Implement functions to appropriate pages
+    5.A. filterEntries
+    5.B. nextWeek/previousWeek for WeeklyCalendar
+    5.C. convertTime?
+    5.D. 
+6. Implement sometype of login or user verification system
+7. Implement React Toast for posting entries to MongoDB
+8. Change the styling for each page to match the 'Feedings' pages
+9. Implement the gets and posts for the content in each page
+    ✓ 9.A. Feedings
+    9.B. Sleeps
+    9.C. Diaper Changes
+    9.D. Doctor Appts
+    9.E. Sicknesses
+    9.F. Injuries
+    9.G. Calendar
+    9.H. Settings
+10. ? - Add a button next to each entry that is listed to remove the entry by having a popup that has the user type 'DELETE' to confirm - ?
+11. Figure out a damn color palette
+12. Add ability to scroll down when the number of entries on any page gets too long for the screen
+    12.A. Feedings
+    12.B. Sleeps
+    12.C. Diaper Changes
+    12.D. Doctor Appts
+    12.E. Sicknesses
+    12.F. Injuries
+    12.G. Calendar - Scroll for a weekly or daily view?
+    12.H. Settings - Scroll for additional settings?
+13. 

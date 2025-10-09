@@ -13,7 +13,9 @@ import './assets/styles/Panels/Calendar.css';
 import './assets/styles/Panels/Settings.css';
 import {
   fetchFeedEntries,
+  postFeedEntry,
   fetchSleepEntries,
+  // postSleepEntry,
 } from '../backend/databaseInteractions.js';
 import ConnectionIndicator from './customComponents/ConnectionIndicator.jsx';
 import WeeklyCalendar from './customComponents/weeklyCalendar.jsx';
@@ -32,15 +34,20 @@ function SlidePanel({ visible, content, onClose, onAdd }) {
   )
 }
 
+
+
+
 function App() {
   const [panelVisible, setPanelVisible] = useState(false);
   const [activePanel, setActivePanel] = useState('');
+  const [addVisible, setAddVisible] = useState(false);
   const [userDate, setUserDate] = useState('');
   const [feedAmount, setFeedAmount] = useState('');
   const [feedType, setFeedType] = useState('');
   const [fromTime, setFromTime] = useState('');
   const [toTime, setToTime] = useState('');
   const [totalSleep, setTotalSleep] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [diaperType, setDiaperType] = useState('');
   const [diaperTime, setDiaperTime] = useState('');
   const [doctorNotes, setDoctorNotes] = useState('');
@@ -51,8 +58,8 @@ function App() {
   const [sleepEntries, setSleepEntries] = useState([]);
 
 
-  const handleAdd = (activePanel) => {
-    setActivePanel(activePanel); //Does nothing right now
+  const handleAdd = () => {
+    setAddVisible(true);
   }
   const playSound = (soundName) => {
     console.log(soundName);
@@ -71,7 +78,6 @@ function App() {
     openPanel(panelName);
     handlePanelContent(panelName);
   }
-
   const openPanel = async (panelName) => {
     //Checks if there is a panel already on screen, then waits for it to slide off screen, then slides in the newly selected panel
     //Also checks if selected panel is already on screen, if so, it breaks out and does nothing
@@ -95,7 +101,54 @@ function App() {
   };
   const closePanel = () => {
     setPanelVisible(false);
+    setAddVisible(false);
     setActivePanel('');
+    clearEverything();
+  };
+  const handleFeedSubmit = (ouncesDrank, date, guardian='Unknown', time, type) => {
+    let guardianSelected = "Unknown" //Switch to automatically providing current user as guardianSelected when a login feature is implemented
+    guardianSelected = guardian;
+    // console.log(`ActivePanel: ${activePanel}`);
+    if (!ouncesDrank) {
+      ouncesDrank = 0.0
+    }
+    if (!date) {
+      date = new Date(Date.now());
+    }
+    if (!type) {
+      type = ('Default')
+    }
+    if ((!time) || (time === date)) {
+      time = new Date(date).toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      });
+    }
+    
+    // console.log(`Amount: ${parseFloat(ouncesDrank)}`);
+    // console.log(`Date: ${date}`);
+    // console.log(`Guardian: ${guardianSelected}`);
+    // console.log(`Type: ${type}`);
+    // console.log(`Time: ${time}`);
+
+    postFeedEntry({
+      amount: parseFloat(ouncesDrank),
+      date: date,
+      guardian: guardianSelected,
+      time: time,
+      type: type,
+    })
+    setAddVisible(false);
+    clearEverything();
+    setTimeout(() => {
+      handlePanelContent('Feedings');
+    }, 1000);
+  };
+  
+  const handleCancel = () => {
+    setAddVisible(false);
     clearEverything();
   };
   const clearEverything = () => {
@@ -111,7 +164,7 @@ function App() {
     setInjuryNotes('');
     setUserDate('');
 
-  }
+  };
 
 
 
@@ -149,11 +202,10 @@ function App() {
             <div className='feedingsSlidePanelContent'>
               <div className='feedingsPanelHeader'>
                 Feedings
-
               </div>
-              <WeekC todayDate={new Date('Tue Oct 28 2025 18:37:12 GMT-0400 (Eastern Daylight Time')} /> {/* Replace new Date(...) with new Date(Date.now()) when testing is finished */}
+              <WeekC todayDate={new Date('Tue Oct 28 2025')} /> {/* Replace new Date(...) with new Date(Date.now()) when testing is finished */}
               <div className='feedingsPanelBody'>
-                <div className='feedingsAddSection'>
+                <div className={`feedingsAddSection ${addVisible ? 'visible' : ''}`}>
                   <div className='feedingsNumberInput'>
                     <p className='feedingsP'>How much did Adalynn eat?</p>
                     <label>
@@ -203,19 +255,28 @@ function App() {
                       onChange={(e) => setUserDate(e.target.value)}
                     />
                   </div>
+                  <div className='feedingsButtonsRow'>
+                    <button className='feedingsSubmitButton' onClick={() => handleFeedSubmit(feedAmount, userDate, 'None', userDate, feedType)}>Submit</button>
+                    <button className='feedingsCancelButton' onClick={() => handleCancel()}>Cancel</button>
+                  </div>
                 </div>
-
                 <div className='feedingsEntryList'>
                   {feedEntries.length === 0 ? (
                     <p className='feedingsP'>No Feedings logged yet...</p>
                   ) : (
-                    <ul>
-                      {feedEntries.map(entry => (
-                        <li key={entry._id} className='feedingsEntryItem'>
-                          <strong>{entry.date}</strong> - {entry.amount} oz of {entry.type} by {entry.guardian} on {entry.time} {/* Replace entry.date with new Date(entry.date).toLocaleDateString() */}
-                        </li>
-                      ))}
-                    </ul>
+                    <div>
+                      <p className='feedingsP'> Date | Amount | Type | Guardian | Time </p>
+                      <ul>
+                        {feedEntries.map(entry => (
+                          <li key={entry._id} className='feedingsEntryItem'>
+                            <strong>
+                              {new Date(entry.date).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}
+                            </strong> 
+                            {' '} - {entry.amount} oz of {entry.type} by {entry.guardian} on {entry.time} 
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
                 </div>
               </div>
@@ -244,6 +305,14 @@ function App() {
                   />
                 </div>
                 <p className='sleepsP'>Total: {totalSleep}</p>
+                <p className='sleepsP'>What day is this for?</p>
+                <div className='sleepsTimeGroup'>
+                    <input
+                      type="datetime-local"
+                      value={userDate}
+                      onChange={(e) => setUserDate(e.target.value)}
+                    />
+                  </div>
                 <ul>
                       {sleepEntries.map(entry => (
                         <li key={entry._id} className='feedingsEntryItem'> {/* Change to sleepsEntryItem */}

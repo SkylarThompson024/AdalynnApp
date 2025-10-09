@@ -53,11 +53,11 @@ const postFeedEntry = async ({ amount, date, guardian, time, type }: {amount: nu
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                amount,     // e.g. "2.5"
-                date,       // e.g. "2025-08-27"
-                guardian,   // e.g. "Brooke"
-                time,       // e.g. "12:30"
-                type,       // e.g. "Breastmilk"
+                amount,     
+                date,       
+                guardian,   
+                time,       
+                type,       
             }),
         });
 
