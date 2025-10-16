@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export function useConnectionStatus(pingUrl = 'https://adalynnapp1.onrender.com/ping', interval = 30000) { //30 Second interval
-    const [isConnected, setIsConnected] = useState(true);
+    const [isConnected, setIsConnected] = useState(false);
 
     useEffect(() => {
         const checkConnection = async() => {

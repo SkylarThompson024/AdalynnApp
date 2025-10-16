@@ -203,7 +203,7 @@ function App() {
               <div className='feedingsPanelHeader'>
                 Feedings
               </div>
-              <WeekC todayDate={new Date('Tue Oct 28 2025')} /> {/* Replace new Date(...) with new Date(Date.now()) when testing is finished */}
+              <WeekC todayDate={new Date(Date.now())} /> {/* Replace new Date(...) with new Date(Date.now()) when testing is finished */}
               <div className='feedingsPanelBody'>
                 <div className={`feedingsAddSection ${addVisible ? 'visible' : ''}`}>
                   <div className='feedingsNumberInput'>
@@ -286,41 +286,55 @@ function App() {
               <div className='sleepsPanelHeader'>
                 Sleeps
               </div>
+              <WeekC todayDate={new Date(Date.now())} />
               <div className='sleepsPanelBody'>
-                <p className='sleepsP'>How long did Adalynn sleep?</p>
-                <div className='sleepsTimeRow'>
-                  <p className='sleepsP'>From: </p>
-                  <input
-                    type='time'
-                    value={fromTime}
-                    onChange={(e) => setFromTime(e.target.value)}
-                  />
-                </div>
-                <div className='sleepsTimeRow'>
-                  <p className='sleepsP'>To: </p>
-                  <input
-                    type='time'
-                    value={toTime}
-                    onChange={(e) => setToTime(e.target.value)}
-                  />
-                </div>
-                <p className='sleepsP'>Total: {totalSleep}</p>
-                <p className='sleepsP'>What day is this for?</p>
-                <div className='sleepsTimeGroup'>
+                <div className='sleepsInputSection'>
+                  <p className='sleepsP'>How long did Adalynn sleep?</p>
+                  <div className='sleepsTimeRow'>
+                    <p className='sleepsP'>From: </p>
                     <input
-                      type="datetime-local"
-                      value={userDate}
-                      onChange={(e) => setUserDate(e.target.value)}
+                      type='time'
+                      value={fromTime}
+                      onChange={(e) => setFromTime(e.target.value)}
                     />
                   </div>
-                <ul>
+                  <div className='sleepsTimeRow'>
+                    <p className='sleepsP'>To: </p>
+                    <input
+                      type='time'
+                      value={toTime}
+                      onChange={(e) => setToTime(e.target.value)}
+                    />
+                  </div>
+                  <p className='sleepsP'>Total: {totalSleep}</p>
+                  <p className='sleepsP'>What day is this for?</p>
+                  <div className='sleepsTimeGroup'>
+                      <input
+                        type="datetime-local"
+                        value={userDate}
+                        onChange={(e) => setUserDate(e.target.value)}
+                      />
+                  </div>
+                </div>
+                <div className='sleepsEntryList'>
+                  {sleepEntries.length === 0 ? (
+                    <p className='sleepsP'>No Sleeps logged yet...</p>
+                  ): (
+                  <div>
+                    <p className='sleepsP'> From | To | Total </p>
+                    <ul>
                       {sleepEntries.map(entry => (
-                        <li key={entry._id} className='feedingsEntryItem'> {/* Change to sleepsEntryItem */}
-                          <strong>{entry.time}</strong> - {entry.amount} oz of {entry.type} by {entry.guardian} on {entry.date} {/* Replace entry.date with new Date(entry.date).toLocaleDateString() */}
+                        <li key={entry._id} className='sleepsEntryItem'> 
+                          <strong>
+                            {new Date(entry.date).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}
+                          </strong>
+                          {' '} - {entry.fromTime} to {entry.toTime} - Total: {entry.elapsedTime}
                         </li>
                       ))}
                     </ul>
-
+                  </div>
+                  )}
+                </div>
               </div>
             </div>
           ) :  activePanel === 'Diaper Change' ? (

@@ -140,9 +140,26 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 .feedingsEntryList ul {
+    overflow-y: auto;
+    max-height: 530px;
     list-style-type: none;
     padding: 0;
     margin: 0;
+}
+.feedingsEntryList ul::-webkit-scrollbar {
+    width: 10px;
+}
+.feedingsEntryList ul::-webkit-scrollbar-track {
+    background-color: var(--blueGrace);
+    border-radius: 4px;
+}
+.feedingsEntryList ul::-webkit-scrollbar-thumb {
+    background-color: var(--raspberryPink);
+    border-radius: 4px;
+    border: 2px solid var(--blueGrace);
+}
+.feedingsEntryList ul::-webkit-scrollbar-thumb:hover {
+    background-color: var(--mintyGreen);
 }
 
 .feedingsEntryItem {
@@ -151,6 +168,7 @@
     font-size: 0.95rem;
     color: var(--mintyGreen);
     line-height: 1.4;
+    margin-right: 5px;
 }
 .feedingsEntryItem > strong {
     font-weight: 600;
@@ -276,6 +294,8 @@
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     .feedingsEntryList ul {
+        overflow-y: auto;
+        max-height: 500px;
         list-style-type: none;
         padding: 0;
         margin: 0;

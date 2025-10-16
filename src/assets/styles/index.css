@@ -22,6 +22,7 @@ html, body {
   background-image: linear-gradient(135deg, var(--mintyGreen), var(--blueGrace), var(--raspberryPink));
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 #wrapper {
   height: 100vh;
@@ -31,7 +32,6 @@ html, body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   flex-wrap: nowrap;
 }
 
@@ -102,11 +102,12 @@ html, body {
   transform: translateX(0%);
 } */
 
-@media (max-width: 430px) {
+@media (max-width: 500px) {
   html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    position: fixed;
     height: 100%;
     width: 100%;
   }
