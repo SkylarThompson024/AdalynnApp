@@ -42,8 +42,10 @@ function App() {
   const [activePanel, setActivePanel] = useState('');
   const [addVisible, setAddVisible] = useState(false);
   const [userDate, setUserDate] = useState('');
+  // Feedings
   const [feedAmount, setFeedAmount] = useState('');
   const [feedType, setFeedType] = useState('');
+  //Sleeps
   const [fromTime, setFromTime] = useState('');
   const [toTime, setToTime] = useState('');
   const [totalSleep, setTotalSleep] = useState('');
@@ -105,6 +107,28 @@ function App() {
     setActivePanel('');
     clearEverything();
   };
+  const calculateTotalTime = (fromTime, toTime) => {
+    if (fromTime && toTime) {
+      fromTime = convertTimeToDateObject(fromTime);
+      toTime = convertTimeToDateObject(toTime);
+      
+      const FROM = new Date(fromTime);
+      const TO = new Date(toTime);
+      const DIFFMs = TO - FROM;
+      const totalMinutes = Math.floor(DIFFMs / (1000 * 60));
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      const totalTime = `${hours} H: ${minutes}M`;
+      setTotalSleep(totalTime)
+    }
+    
+  }
+  const convertTimeToDateObject = (timeStr) => {
+    const [hours, minutes] = timeStr.split(':').map(Number);
+      const tempDate = new Date();
+      tempDate.setHours(hours, minutes, 0, 0)
+      return tempDate;
+  }
   const handleFeedSubmit = (ouncesDrank, date, guardian='Unknown', time, type) => {
     let guardianSelected = "Unknown" //Switch to automatically providing current user as guardianSelected when a login feature is implemented
     guardianSelected = guardian;
@@ -146,6 +170,9 @@ function App() {
       handlePanelContent('Feedings');
     }, 1000);
   };
+  const handleSleepSubmit = (fromTime, toTime, totalSleep, date) => {
+
+  }
   
   const handleCancel = () => {
     setAddVisible(false);
@@ -288,32 +315,42 @@ function App() {
               </div>
               <WeekC todayDate={new Date(Date.now())} />
               <div className='sleepsPanelBody'>
-                <div className='sleepsInputSection'>
-                  <p className='sleepsP'>How long did Adalynn sleep?</p>
-                  <div className='sleepsTimeRow'>
-                    <p className='sleepsP'>From: </p>
-                    <input
-                      type='time'
-                      value={fromTime}
-                      onChange={(e) => setFromTime(e.target.value)}
-                    />
-                  </div>
-                  <div className='sleepsTimeRow'>
-                    <p className='sleepsP'>To: </p>
-                    <input
-                      type='time'
-                      value={toTime}
-                      onChange={(e) => setToTime(e.target.value)}
-                    />
-                  </div>
-                  <p className='sleepsP'>Total: {totalSleep}</p>
-                  <p className='sleepsP'>What day is this for?</p>
-                  <div className='sleepsTimeGroup'>
+                <div className={`sleepsAddSection ${addVisible ? 'visible' : ''}`}>
+                  <div className='sleepsInputSection'>
+                    <p className='sleepsP'>How long did Adalynn sleep?</p>
+                    <div className='sleepsTimeRow'>
+                      <p className='sleepsP'>From: </p>
                       <input
-                        type="datetime-local"
-                        value={userDate}
-                        onChange={(e) => setUserDate(e.target.value)}
+                        type='time'
+                        value={fromTime}
+                        onChange={(e) => {setFromTime(e.target.value);
+                          calculateTotalTime(e.target.value, toTime);
+                        }}
                       />
+                    </div>
+                    <div className='sleepsTimeRow'>
+                      <p className='sleepsP'>To: </p>
+                      <input
+                        type='time'
+                        value={toTime}
+                        onChange={(e) => {setToTime(e.target.value);
+                          calculateTotalTime(fromTime, e.target.value)
+                        }}
+                      />
+                    </div>
+                    <p className='sleepsP'>Total: {totalSleep}</p>
+                    <p className='sleepsP'>What day is this for?</p>
+                    <div className='sleepsTimeGroup'>
+                        <input
+                          type="datetime-local"
+                          value={userDate}
+                          onChange={(e) => setUserDate(e.target.value)}
+                        />
+                    </div>
+                    <div className='sleepsButtonRow'>
+                      <button className='sleepsSubmitButton' onClick={() => handleSleepSubmit(fromTime, toTime, totalSleep, userDate)}>Submit</button>
+                      <button className='sleepsCancelButton' onClick={() => handleCancel()}>Cancel</button>
+                    </div>
                   </div>
                 </div>
                 <div className='sleepsEntryList'>

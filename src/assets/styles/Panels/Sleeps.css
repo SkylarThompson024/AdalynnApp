@@ -35,15 +35,24 @@
     font-size: 80px;
     text-shadow: black 2px 3px 3px;
 }
-
+.sleepsAddSection {
+    display: none;
+    background: linear-gradient(135deg, var(--raspberryPink), var(--blueGrace), var(--mintyGreen)) border-box;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding-bottom: 0.75rem;
+    padding-inline: 1rem;
+}
+.sleepsAddSection.visible {
+    display: unset;
+}
 
 .sleepsPanelBody {
-    background: linear-gradient(black, black) padding-box,
-                linear-gradient(135deg, var(--raspberryPink), var(--blueGrace), var(--mintyGreen)) border-box;
-    border: 5px, solid, transparent;
-    border-radius: 15px;
-    margin-top: 1%;
-    padding-bottom: 1%;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
 }
 .sleepsTimeRow {
     display: flex;
@@ -53,11 +62,8 @@
 .sleepsTimeRow input[type="time"] {
     background-color: var(--blueGrace);
     border-radius: 4px;
-    border-width: 2.5px;
-    border-color: None;
-    border-style: None;
-    margin-left: auto;
-    margin-right: 40%;
+    border: 1px solid black;
+    margin-inline: auto;
     height: min-content;
     margin-top: auto;
     margin-bottom: auto;
@@ -82,11 +88,10 @@
 .sleepsTimeGroup input[type="datetime-local"] {
     background-color: var(--blueGrace);
     border-radius: 4px;
-    border-width: 2.5px;
-    border-color: None;
-    border-style: None;
+    border: 1px solid black;
     width: min-content;
-    margin-left: 10%;
+    margin-left: 5%;
+
 }
 
 .sleepsP {
@@ -162,5 +167,10 @@
     border-radius: 0 0 1rem 1rem;
 }
 @media (max-width: 500px) {
-
+.sleepsAddSection {
+    width: max-content;
+    background: linear-gradient(135deg, var(--raspberryPink), var(--blueGrace), var(--mintyGreen)) border-box;
+    border: 2px solid black;
+    padding-inline: 0.75rem;
+}
 }
