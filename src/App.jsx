@@ -15,6 +15,7 @@ import {
   fetchFeedEntries,
   postFeedEntry,
   fetchSleepEntries,
+  postSleepEntry,
   // postSleepEntry,
 } from '../backend/databaseInteractions.js';
 import ConnectionIndicator from './customComponents/ConnectionIndicator.jsx';
@@ -49,15 +50,21 @@ function App() {
   const [fromTime, setFromTime] = useState('');
   const [toTime, setToTime] = useState('');
   const [totalSleep, setTotalSleep] = useState('');
+  //Diaper Changes
   // eslint-disable-next-line no-unused-vars
   const [diaperType, setDiaperType] = useState('');
   const [diaperTime, setDiaperTime] = useState('');
+  const [diaperEntires, setDiaperEntires] = useState([]);
+  //Doctor Appts
   const [doctorNotes, setDoctorNotes] = useState('');
+  //Sicknesses
   const [sickNotes, setSickNotes] = useState('');
+  //Injuries
   const [injuryNotes, setInjuryNotes] = useState('');
 
   const [feedEntries, setFeedEntries] = useState([]);
   const [sleepEntries, setSleepEntries] = useState([]);
+  
 
 
   const handleAdd = () => {
@@ -170,9 +177,25 @@ function App() {
       handlePanelContent('Feedings');
     }, 1000);
   };
-  const handleSleepSubmit = (fromTime, toTime, totalSleep, date) => {
-
-  }
+  const handleSleepSubmit = (fromTime, toTime, totalSleep, date, guardian='Unknown') => {
+    let guardianSelected = "Unknown" //Switch to automatically providing current user as guardianSelected when a login feature is implemented
+    guardianSelected = guardian;
+    if (!date) {
+      date = new Date(Date.now())
+    }
+    postSleepEntry({
+      fromTime: fromTime,
+      toTime: toTime,
+      elapsedTime: totalSleep,
+      date: date,
+      guardian: guardianSelected,
+    })
+    setAddVisible(false);
+    clearEverything();
+    setTimeout(() => {
+      handlePanelContent('Sleeps');
+    }, 1000);
+  };
   
   const handleCancel = () => {
     setAddVisible(false);
@@ -348,7 +371,7 @@ function App() {
                         />
                     </div>
                     <div className='sleepsButtonRow'>
-                      <button className='sleepsSubmitButton' onClick={() => handleSleepSubmit(fromTime, toTime, totalSleep, userDate)}>Submit</button>
+                      <button className='sleepsSubmitButton' onClick={() => handleSleepSubmit(fromTime, toTime, totalSleep, userDate, 'None')}>Submit</button>
                       <button className='sleepsCancelButton' onClick={() => handleCancel()}>Cancel</button>
                     </div>
                   </div>

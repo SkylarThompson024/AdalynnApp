@@ -38,4 +38,6 @@
     12.F. Injuries
     12.G. Calendar - Scroll for a weekly or daily view?
     12.H. Settings - Scroll for additional settings?
-13. 
+13. Fix/Implement calculateTotalTime() in App.jsx
+14. Implement deleteEntry() / seperate functions for each page?
+15. 
