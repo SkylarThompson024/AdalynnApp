@@ -68,7 +68,8 @@ html, body {
   position: relative;
   flex: 2;
   height: 95vh;
-  background-image: linear-gradient(225deg, var(--mintyGreen), var(--blueGrace), var(--raspberryPink));
+  background-image: linear-gradient(225deg, var(--mintyGreen), var(--blueGrace), var(--raspberryPink)); 
+  /* #fff8f3 */
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   border-left-style: solid;

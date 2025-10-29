@@ -63,7 +63,7 @@
     margin-top: 1rem;
     gap: 1rem;
 }
-.feedingsSubmitButton {
+.feedingsButton {
     border: 1px solid black;
     border-radius: 1rem;
     padding: 0.25rem;
@@ -71,19 +71,7 @@
     background-color: var(--blueGrace);
     color: black;
 }
-.feedingsSubmitButton:active {
-    background-color: var(--raspberryPink);
-}
-
-.feedingsCancelButton {
-    border: 1px solid black;
-    border-radius: 1rem;
-    padding: 0.25rem;
-    padding-inline: 1rem;
-    background-color: var(--blueGrace);
-    color: black;
-}
-.feedingsCancelButton:active {
+.feedingsButton:active {
     background-color: var(--raspberryPink);
 }
 

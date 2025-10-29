@@ -16,6 +16,14 @@ import {
   postFeedEntry,
   fetchSleepEntries,
   postSleepEntry,
+  postDiaperEntry,
+  fetchDiaperEntries,
+  fetchDoctorEntries,
+  fetchSickEntries,
+  fetchInjuryEntries,
+  postDoctorEntry,
+  postSickEntry,
+  postInjuryEntry,
   // postSleepEntry,
 } from '../backend/databaseInteractions.js';
 import ConnectionIndicator from './customComponents/ConnectionIndicator.jsx';
@@ -46,24 +54,28 @@ function App() {
   // Feedings
   const [feedAmount, setFeedAmount] = useState('');
   const [feedType, setFeedType] = useState('');
+  const [feedEntries, setFeedEntries] = useState([]);
   //Sleeps
   const [fromTime, setFromTime] = useState('');
   const [toTime, setToTime] = useState('');
   const [totalSleep, setTotalSleep] = useState('');
+  const [sleepEntries, setSleepEntries] = useState([]);
   //Diaper Changes
-  // eslint-disable-next-line no-unused-vars
   const [diaperType, setDiaperType] = useState('');
   const [diaperTime, setDiaperTime] = useState('');
   const [diaperEntires, setDiaperEntires] = useState([]);
   //Doctor Appts
   const [doctorNotes, setDoctorNotes] = useState('');
+  const [doctorEntires, setDoctorEntries] = useState('');
   //Sicknesses
   const [sickNotes, setSickNotes] = useState('');
+  const [sickEntries, setSickEntries] = useState('');
   //Injuries
   const [injuryNotes, setInjuryNotes] = useState('');
+  const [injuryEntries, setInjuryEntries] = useState('');
 
-  const [feedEntries, setFeedEntries] = useState([]);
-  const [sleepEntries, setSleepEntries] = useState([]);
+  
+  
   
 
 
@@ -81,6 +93,22 @@ function App() {
     if (panelName === "Sleeps") {
       const entries = await fetchSleepEntries()
       setSleepEntries(entries)
+    }
+    if (panelName === "Diaper Change") {
+      const entries = await fetchDiaperEntries()
+      setDiaperEntires(entries)
+    }
+    if (panelName === "Doctor Appts") {
+      const entries = await fetchDoctorEntries()
+      setDoctorEntries(entries)
+    }
+    if (panelName === "Sicknesses") {
+      const entries = await fetchSickEntries()
+      setSickEntries(entries)
+    }
+    if (panelName === "Injuries") {
+      const entries = await fetchInjuryEntries()
+      setInjuryEntries(entries)
     }
   }
   const handleCardClick = (panelName) => {
@@ -180,8 +208,8 @@ function App() {
   const handleSleepSubmit = (fromTime, toTime, totalSleep, date, guardian='Unknown') => {
     let guardianSelected = "Unknown" //Switch to automatically providing current user as guardianSelected when a login feature is implemented
     guardianSelected = guardian;
-    if (!date) {
-      date = new Date(Date.now())
+    if (typeof date != Date) {
+      date = new Date(Date.now());
     }
     postSleepEntry({
       fromTime: fromTime,
@@ -196,6 +224,107 @@ function App() {
       handlePanelContent('Sleeps');
     }, 1000);
   };
+  const handleDiaperSubmit = (type, date, guardian='Unknown', time) => {
+    let guardianSelected = "Unknown" //Switch to automatically providing current user as guardianSelected when a login feature is implemented
+    guardianSelected = guardian;
+    if (typeof date != Date) {
+      date = new Date(Date.now());
+    }
+    if (!type) {
+      type = ('Default')
+    }
+    if ((!time) || (time === date)) {
+      time = new Date(date).toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      });
+    }
+    postDiaperEntry({
+      type: type,
+      date: date,
+      guardian: guardianSelected,
+      time: time,
+    })
+    setAddVisible(false);
+    clearEverything();
+    setTimeout(() => {
+      handlePanelContent('Diaper Change');
+    }, 1000);
+  };
+  const handleDoctorSubmit = (date, guardian, notes) => {
+    let guardianSelected = "Unknown" //Switch to automatically providing current user as guardianSelected when a login feature is implemented
+    guardianSelected = guardian;
+    if (typeof date != Date) {
+      date = new Date(Date.now());
+    }
+    let time = new Date(date).toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    });
+    postDoctorEntry({
+      date: date,
+      time: time,
+      notes: notes,
+      guardian: guardianSelected,
+    })
+    setAddVisible(false);
+    clearEverything();
+    setTimeout(() => {
+      handlePanelContent('Doctor Appts');
+    }, 1000);
+  };
+  const handleSickSubmit = (date, guardian, notes) => {
+    let guardianSelected = "Unknown" //Switch to automatically providing current user as guardianSelected when a login feature is implemented
+    guardianSelected = guardian;
+    if (typeof date != Date) {
+      date = new Date(Date.now());
+    }
+    let time = new Date(date).toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    });
+    postSickEntry({
+      date: date,
+      time: time,
+      notes: notes,
+      guardian: guardianSelected,
+    })
+    setAddVisible(false);
+    clearEverything();
+    setTimeout(() => {
+      handlePanelContent('Sicknesses');
+    }, 1000);
+  };
+  const handleInjurySubmit = (date, guardian, notes) => {
+    let guardianSelected = "Unknown" //Switch to automatically providing current user as guardianSelected when a login feature is implemented
+    guardianSelected = guardian;
+    if (typeof date != Date) {
+      date = new Date(Date.now());
+    }
+    let time = new Date(date).toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    });
+    postInjuryEntry({
+      date: date,
+      time: time,
+      notes: notes,
+      guardian: guardianSelected,
+    })
+    setAddVisible(false);
+    clearEverything();
+    setTimeout(() => {
+      handlePanelContent('Injuries');
+    }, 1000);
+  }
   
   const handleCancel = () => {
     setAddVisible(false);
@@ -229,12 +358,12 @@ function App() {
             <Card name='Sleeps' onClick={() => handleCardClick('Sleeps')}/>
           </div>
           <div className='tabRow'>
-            <Card name='Diaper Change' onClick={() => openPanel('Diaper Change')}/>
-            <Card name='Doctor Appts' onClick={() => openPanel('Doctor Appts')}/>
+            <Card name='Diaper Change' onClick={() => handleCardClick('Diaper Change')}/>
+            <Card name='Doctor Appts' onClick={() => handleCardClick('Doctor Appts')}/>
           </div>
           <div className='tabRow'>
-            <Card name='Sicknesses' onClick={() => openPanel('Sicknesses')}/>
-            <Card name='Injuries' onClick={() => openPanel('Injuries')}/>
+            <Card name='Sicknesses' onClick={() => handleCardClick('Sicknesses')}/>
+            <Card name='Injuries' onClick={() => handleCardClick('Injuries')}/>
           </div>
           <div className='tabRow'>
             <Card name='Calendar' onClick={() => openPanel('Calendar')}/>
@@ -306,8 +435,8 @@ function App() {
                     />
                   </div>
                   <div className='feedingsButtonsRow'>
-                    <button className='feedingsSubmitButton' onClick={() => handleFeedSubmit(feedAmount, userDate, 'None', userDate, feedType)}>Submit</button>
-                    <button className='feedingsCancelButton' onClick={() => handleCancel()}>Cancel</button>
+                    <button className='feedingsButton' onClick={() => handleFeedSubmit(feedAmount, userDate, 'None', userDate, feedType)}>Submit</button>
+                    <button className='feedingsButton' onClick={() => handleCancel()}>Cancel</button>
                   </div>
                 </div>
                 <div className='feedingsEntryList'>
@@ -322,7 +451,7 @@ function App() {
                             <strong>
                               {new Date(entry.date).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}
                             </strong> 
-                            {' '} - {entry.amount} oz of {entry.type} by {entry.guardian} on {entry.time} 
+                            {' '} - {entry.amount} oz of {entry.type} by {entry.guardian} at {entry.time} 
                           </li>
                         ))}
                       </ul>
@@ -370,9 +499,9 @@ function App() {
                           onChange={(e) => setUserDate(e.target.value)}
                         />
                     </div>
-                    <div className='sleepsButtonRow'>
-                      <button className='sleepsSubmitButton' onClick={() => handleSleepSubmit(fromTime, toTime, totalSleep, userDate, 'None')}>Submit</button>
-                      <button className='sleepsCancelButton' onClick={() => handleCancel()}>Cancel</button>
+                    <div className='sleepsButtonsRow'>
+                      <button className='sleepsButton' onClick={() => handleSleepSubmit(fromTime, toTime, totalSleep, userDate, 'None')}>Submit</button>
+                      <button className='sleepsButton' onClick={() => handleCancel()}>Cancel</button>
                     </div>
                   </div>
                 </div>
@@ -402,20 +531,46 @@ function App() {
               <div className='diaperPanelHeader'>
                 Diaper Change
               </div>
+              <WeekC todayDate={new Date(Date.now())} />
               <div className='diaperPanelBody'>
-                <p className='diaperP'>What type of diaper change was it?</p>
-                <div className='diaperIconsRow'>
-                  <Card name='Wet' onClick={(e) => {playSound(e.target.name); setDiaperType('Wet')}}/>
-                  <Card name='Solid' onClick={(e) => {playSound(e.target.name); setDiaperType('Solid')}}/>
-                  <Card name='Both' onClick={(e) => {playSound(e.target.name); setDiaperType('Both')}}/>
-                  <Card name='Blowout' onClick={(e) => {playSound(e.target.name); setDiaperType('Blowout')}}/>
+                <div className={`diaperAddSection ${addVisible ? 'visible' : ''}`}>
+                  <p className='diaperP'>What type of diaper change was it?</p>
+                  <div className='diaperIconsRow'>
+                    <Card name='Wet' onClick={(e) => {playSound(e.target.name); setDiaperType('Wet')}}/>
+                    <Card name='Solid' onClick={(e) => {playSound(e.target.name); setDiaperType('Solid')}}/>
+                    <Card name='Both' onClick={(e) => {playSound(e.target.name); setDiaperType('Both')}}/>
+                    <Card name='Blowout' onClick={(e) => {playSound(e.target.name); setDiaperType('Blowout')}}/>
+                  </div>
+                  <p className='diaperP'>What time was the diaper changed?</p>
+                  <input
+                    type='time'
+                    value={diaperTime}
+                    onChange={(e) => setDiaperTime(e.target.value)}
+                  />
+                  <div className='diaperButtonsRow'>
+                    <button className='diaperButton' onClick={() => handleDiaperSubmit(diaperType, userDate, 'None', diaperTime)}>Submit</button>
+                    <button className='diaperButton' onClick={() => handleCancel()}>Cancel</button>
+                  </div>
                 </div>
-                <p className='diaperP'>What time was the diaper changed?</p>
-                <input
-                  type='time'
-                  value={diaperTime}
-                  onChange={(e) => setDiaperTime(e.target.value)}
-                />
+                <div className='diaperEntryList'>
+                  {diaperEntires.length === 0 ? (
+                    <p className='diaperP'>No Diaper Changes logged yet...</p>
+                  ) : (
+                    <div>
+                      <p className='diaperP'> Date | Type | Guardian | Time </p>
+                      <ul>
+                        {diaperEntires.map(entry => (
+                          <li key={entry._id} className='diaperEntryItem'>
+                            <strong>
+                              {new Date(entry.date).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}
+                            </strong>
+                            {' '} - {entry.type} with {entry.guardian} at {entry.time}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           ) :  activePanel === 'Doctor Appts' ? (
@@ -423,20 +578,46 @@ function App() {
               <div className='doctorPanelHeader'>
                 Doctor Appts
               </div>
+              <WeekC todayDate={new Date(Date.now())} />
               <div className='doctorPanelBody'>
-                <p className='doctorP'>What is the Doctor's Appointment for?</p>
-                <input
-                  type='text'
-                  placeholder='Start typing here...'
-                  value={doctorNotes}
-                  onChange={(e) => setDoctorNotes(e.target.value)}
-                />
-                <p className='doctorP'>What time and day is the appointment for?</p>
-                <input
-                  type='datetime-local'
-                  value={userDate}
-                  onChange={(e) => setUserDate(e.target.value)}
-                />
+                <div className={`doctorAddSection ${addVisible ? 'visible' : ''}`}>
+                  <p className='doctorP'>What is the Doctor's Appointment for?</p>
+                  <input
+                    type='text'
+                    placeholder='Start typing here...'
+                    value={doctorNotes}
+                    onChange={(e) => setDoctorNotes(e.target.value)}
+                  />
+                  <p className='doctorP'>What time and day is the appointment for?</p>
+                  <input
+                    type='datetime-local'
+                    value={userDate}
+                    onChange={(e) => setUserDate(e.target.value)}
+                  />
+                  <div className='doctorButtonsRow'>
+                    <button className='doctorButton' onClick={() => handleDoctorSubmit(userDate, 'None', doctorNotes)}>Submit</button>
+                    <button className='doctorButton' onClick={() => handleCancel()}>Cancel</button>
+                  </div>
+                </div>
+                <div className='doctorEntryList'>
+                  {doctorEntires.length === 0 ? (
+                    <p className='doctorP'>No Doctor Appts logged yet...</p>
+                  ) : (
+                    <div>
+                      <p className='doctorP'> Date | Time | Guardian | Notes </p>
+                      <ul>
+                        {doctorEntires.map(entry => (
+                          <li key={entry._id} className='doctorEntryItem'>
+                            <strong>
+                              {new Date(entry.date).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}
+                            </strong>
+                            {' '} - at {entry.time} by {entry.guardian} - Notes: {entry.notes}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           ) :  activePanel === 'Sicknesses' ? (
@@ -444,20 +625,46 @@ function App() {
               <div className='sickPanelHeader'>
                 Sicknesses
               </div>
+              <WeekC todayDate={new Date(Date.now())} />
               <div className='sickPanelBody'>
-                <p className='sickP'>What happened with Adalynn?</p>
-                <input
-                  type='text'
-                  placeholder='Start typing here...'
-                  value={sickNotes}
-                  onChange={(e) => setSickNotes(e.target.value)}
-                />
-                <p className='sickP'>What time and day did this happen?</p>
-                <input
-                  type='datetime-local'
-                  value={userDate}
-                  onChange={(e) => setUserDate(e.target.value)}
-                />
+                <div className={`sickAddSection ${addVisible ? 'visible' : ''}`}>
+                  <p className='sickP'>What happened with Adalynn?</p>
+                  <input
+                    type='text'
+                    placeholder='Start typing here...'
+                    value={sickNotes}
+                    onChange={(e) => setSickNotes(e.target.value)}
+                  />
+                  <p className='sickP'>What time and day did this happen?</p>
+                  <input
+                    type='datetime-local'
+                    value={userDate}
+                    onChange={(e) => setUserDate(e.target.value)}
+                  />
+                  <div className='sickButtonsRow'>
+                    <button className='sickButton' onClick={() => handleSickSubmit(userDate, 'None', sickNotes)}>Submit</button>
+                    <button className='sickButton' onClick={() => handleCancel()}>Cancel</button>
+                  </div>
+                </div>
+                <div className='sickEntryList'>
+                  {sickEntries.length === 0 ? (
+                    <p className='sickP'>No Sicknesses logged yet...</p>
+                  ) : (
+                    <div>
+                      <p className='sickP'> Date | Time | Guardian | Notes </p>
+                      <ul>
+                        {sickEntries.map(entry => (
+                          <li key={entry._id} className='sickEntryItem'>
+                            <strong>
+                              {new Date(entry.date).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}
+                            </strong>
+                            {' '} - at {entry.time} with {entry.guardian} - Notes: {entry.notes}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           ) :  activePanel === 'Injuries' ? (
@@ -465,20 +672,46 @@ function App() {
               <div className='injuryPanelHeader'>
                 Injuries
               </div>
+              <WeekC todayDate={new Date(Date.now())} />
               <div className='injuryPanelBody'>
-                <p className='injuryP'>What happen to Adalynn?</p>
-                <input
-                  type='text'
-                  placeholder='Start typing here...'
-                  value={injuryNotes}
-                  onChange={(e) => setInjuryNotes(e.target.value)}
-                />
-                <p className='sickP'>What time and day did this happen?</p>
-                <input
-                  type='datetime-local'
-                  value={userDate}
-                  onChange={(e) => setUserDate(e.target.value)}
-                />
+                <div className={`injuryAddSection ${addVisible ? 'visible' : ''}`}>
+                  <p className='injuryP'>What happen to Adalynn?</p>
+                  <input
+                    type='text'
+                    placeholder='Start typing here...'
+                    value={injuryNotes}
+                    onChange={(e) => setInjuryNotes(e.target.value)}
+                  />
+                  <p className='sickP'>What time and day did this happen?</p>
+                  <input
+                    type='datetime-local'
+                    value={userDate}
+                    onChange={(e) => setUserDate(e.target.value)}
+                  />
+                  <div className='injuryButtonsRow'>
+                    <button className='injuryButton' onClick={() => handleInjurySubmit(userDate, 'None', injuryNotes)}>Submit</button>
+                    <button className='injuryButton' onClick={() => handleCancel()}>Cancel</button>
+                  </div>
+                </div>
+                <div className='injuryEntryList'>
+                  {injuryEntries.length === 0 ? (
+                    <p className='injuryP'>No Injuries logged yet...</p>
+                  ) : (
+                    <div>
+                      <p className='injuryP'> Date | Time | Guardian | Notes </p>
+                      <ul>
+                        {injuryEntries.map(entry => (
+                          <li key={entry._id} className='injuryEntryItem'>
+                            <strong>
+                              {new Date(entry.date).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}
+                            </strong>
+                            {' '} - at {entry.time} with {entry.guardian} - Notes: {entry.notes} 
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           ) :  activePanel === 'Calendar' ? (

@@ -46,6 +46,24 @@
 .sleepsAddSection.visible {
     display: unset;
 }
+.sleepsButtonsRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+.sleepsButton {
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding: 0.25rem;
+    padding-inline: 1rem;
+    background-color: var(--blueGrace);
+    color: black;
+}
+.sleepsButton:active {
+    background-color: var(--raspberryPink);
+}
 
 .sleepsPanelBody {
     display: flex;
