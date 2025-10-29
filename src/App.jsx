@@ -1,6 +1,7 @@
 import Header from './views/partials/Header.jsx';
 import Card from './customComponents/Card.jsx';
 import Modal from 'react-modal';
+import Calendar from 'react-calendar';
 import { useState } from 'react';
 import './assets/styles/Panel.css';
 import './assets/styles/Panels/Feedings.css';
@@ -73,8 +74,9 @@ function App() {
   //Injuries
   const [injuryNotes, setInjuryNotes] = useState('');
   const [injuryEntries, setInjuryEntries] = useState('');
-
-  
+  //Calendar
+  const [calendarDate, setCalendarDate] = useState(new Date());
+  const markedDates = ['2025-11-01', '2025-11-05', '2025-11-10'];
   
   
 
@@ -716,11 +718,22 @@ function App() {
             </div>
           ) :  activePanel === 'Calendar' ? (
             <div className='slidepanelContent'>
-              <div className='panelHeader'>
+              <div className='calendarPanelHeader'>
                 Calendar
               </div>
-              <div className='panelBody'>
-                <p>Calendar content goes here.</p>
+              <div className='calendarPanelBody'>
+                <div className='calendarContainer'>
+                  <Calendar
+                    locale='en-US'
+                    onChange={setCalendarDate}
+                    value={calendarDate}
+                    formatShortWeekday={(locale, date) => 
+                      date.toLocaleDateString(locale, { weekday: 'long' })
+                    }
+
+                  />
+                </div>
+                <p>Selected date: {calendarDate.toLocaleDateString()}</p>
               </div>
             </div>
           ) :  activePanel === 'Settings' ? (
