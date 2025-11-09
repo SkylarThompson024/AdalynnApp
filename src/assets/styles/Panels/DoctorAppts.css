@@ -116,10 +116,10 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 .doctorEntryList ul {
-    overflow-y: auto;
-    max-height: 530px;
-    max-width: 28rem;
     list-style-type: none;
+    overflow-y: auto;
+    font-family: sans-serif;
+    max-height: 530px;
     padding: 0;
     margin: 0;
 }
@@ -149,27 +149,25 @@
 }
 .doctorEntryItem > strong {
     font-weight: 600;
-    color: var(--blueGrace);
+    color: #ccc;
+    text-shadow: 1px 1px 2px black;
 }
 .doctorEntryItem:last-child {
     border-bottom: none;
 }
-.doctorEntryItem:nth-child(1n) {
-    color: #ffd6e3;
-    background-color: rgba(231, 70, 89, 0.5);
+.doctorEntryItem:nth-child(odd) {
+    color: var(--blueGrace);
+    background-color: rgba(255, 155, 205, 0.5);
+    text-shadow: 1px 1px 2px black;
 }
-.doctorEntryItem:nth-child(2n) {
-    color: #dcebff;
+.doctorEntryItem:nth-child(even) {
+    color: var(--raspberryPink);
     background-color: rgba(111, 157, 224, 0.5);
+    text-shadow: 1px 1px 2px black;
 }
 .doctorEntryItem:first-child {
-    color: #dcebff;
-    background-color: rgba(255, 155, 205, 0.5);
     border-radius: 1rem 1rem 0 0;
 }
 .doctorEntryItem:last-child {
-    /* background-color: rgba(50, 50, 50, 0.5) */
-    color: #ff9bcd;
-    background-color: rgba(90, 231, 172, 0.5);
     border-radius: 0 0 1rem 1rem;
 }

@@ -26,8 +26,11 @@
     font-size: 80px;
     text-shadow: black 2px 3px 3px;
 }
+.calendarPanelBody {
+    display: flex;
+}
 .calendarContainer {
-    padding: 2rem;
+    padding: 1rem;
 }
 .marked {
     position: relative;

@@ -76,7 +76,6 @@ function App() {
   const [injuryEntries, setInjuryEntries] = useState('');
   //Calendar
   const [calendarDate, setCalendarDate] = useState(new Date());
-  const markedDates = ['2025-11-01', '2025-11-05', '2025-11-10'];
   
   
 
@@ -446,7 +445,7 @@ function App() {
                     <p className='feedingsP'>No Feedings logged yet...</p>
                   ) : (
                     <div>
-                      <p className='feedingsP'> Date | Amount | Type | Guardian | Time </p>
+                      {/* <p className='feedingsP'> Date | Amount | Type | Guardian | Time </p> */}
                       <ul>
                         {feedEntries.map(entry => (
                           <li key={entry._id} className='feedingsEntryItem'>
@@ -512,7 +511,7 @@ function App() {
                     <p className='sleepsP'>No Sleeps logged yet...</p>
                   ): (
                   <div>
-                    <p className='sleepsP'> From | To | Total </p>
+                    {/* <p className='sleepsP'> From | To | Total </p> */}
                     <ul>
                       {sleepEntries.map(entry => (
                         <li key={entry._id} className='sleepsEntryItem'> 
@@ -559,7 +558,7 @@ function App() {
                     <p className='diaperP'>No Diaper Changes logged yet...</p>
                   ) : (
                     <div>
-                      <p className='diaperP'> Date | Type | Guardian | Time </p>
+                      {/* <p className='diaperP'> Date | Type | Guardian | Time </p> */}
                       <ul>
                         {diaperEntires.map(entry => (
                           <li key={entry._id} className='diaperEntryItem'>
@@ -606,7 +605,7 @@ function App() {
                     <p className='doctorP'>No Doctor Appts logged yet...</p>
                   ) : (
                     <div>
-                      <p className='doctorP'> Date | Time | Guardian | Notes </p>
+                      {/* <p className='doctorP'> Date | Time | Guardian | Notes </p> */}
                       <ul>
                         {doctorEntires.map(entry => (
                           <li key={entry._id} className='doctorEntryItem'>
@@ -653,7 +652,7 @@ function App() {
                     <p className='sickP'>No Sicknesses logged yet...</p>
                   ) : (
                     <div>
-                      <p className='sickP'> Date | Time | Guardian | Notes </p>
+                      {/* <p className='sickP'> Date | Time | Guardian | Notes </p> */}
                       <ul>
                         {sickEntries.map(entry => (
                           <li key={entry._id} className='sickEntryItem'>
@@ -700,7 +699,7 @@ function App() {
                     <p className='injuryP'>No Injuries logged yet...</p>
                   ) : (
                     <div>
-                      <p className='injuryP'> Date | Time | Guardian | Notes </p>
+                      {/* <p className='injuryP'> Date | Time | Guardian | Notes </p> */}
                       <ul>
                         {injuryEntries.map(entry => (
                           <li key={entry._id} className='injuryEntryItem'>
@@ -722,6 +721,13 @@ function App() {
                 Calendar
               </div>
               <div className='calendarPanelBody'>
+                <Modal 
+                  className='modalNotReadyYet'
+                  isOpen={true}
+                  
+                >
+                  <p>Sorry, This feature is not ready yet...</p>
+                </Modal>
                 <div className='calendarContainer'>
                   <Calendar
                     locale='en-US'
@@ -733,15 +739,22 @@ function App() {
 
                   />
                 </div>
-                <p>Selected date: {calendarDate.toLocaleDateString()}</p>
+                {/* <p>Selected date: {calendarDate.toLocaleDateString()}</p> */}
               </div>
             </div>
           ) :  activePanel === 'Settings' ? (
             <div className='slidepanelContent'>
-              <div className='panelHeader'>
+              <div className='settingsPanelHeader'>
                 Settings
               </div>
-              <div className='panelBody'>
+              <div className='settingsPanelBody'>
+                <Modal 
+                  className='modalNotReadyYet'
+                  isOpen={true}
+                  
+                >
+                  <p>Sorry, This feature is not ready yet...</p>
+                </Modal>
                 <p>Settings content goes here.</p>
               </div>
             </div>

@@ -112,9 +112,10 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 .diaperEntryList ul {
-    overflow-y: auto;
-    max-height: 530px;
     list-style-type: none;
+    overflow-y: auto;
+    font-family: sans-serif;
+    max-height: 530px;
     padding: 0;
     margin: 0;
 }
@@ -136,7 +137,7 @@
 
 .diaperEntryItem {
     padding: 0.75rem 0.5rem;
-    border-bottom: 1px solid var(--raspberryPink);
+    border-bottom: 1px solid #eee;
     font-size: 0.95rem;
     color: var(--mintyGreen);
     line-height: 1.4;
@@ -144,27 +145,25 @@
 }
 .diaperEntryItem > strong {
     font-weight: 600;
-    color: var(--blueGrace);
+    color: #ccc;
+    text-shadow: 1px 1px 2px black;
 }
 .diaperEntryItem:last-child {
     border-bottom: none;
 }
-.diaperEntryItem:nth-child(1n) {
-    color: #ffd6e3;
-    background-color: rgba(231, 70, 89, 0.5);
+.diaperEntryItem:nth-child(odd) {
+    color: var(--blueGrace);
+    background-color: rgba(255, 155, 205, 0.5);
+    text-shadow: 1px 1px 2px black;
 }
-.diaperEntryItem:nth-child(2n) {
-    color: #dcebff;
+.diaperEntryItem:nth-child(even) {
+    color: var(--raspberryPink);
     background-color: rgba(111, 157, 224, 0.5);
+    text-shadow: 1px 1px 2px black;
 }
 .diaperEntryItem:first-child {
-    color: #dcebff;
-    background-color: rgba(255, 155, 205, 0.5);
     border-radius: 1rem 1rem 0 0;
 }
 .diaperEntryItem:last-child {
-    /* background-color: rgba(50, 50, 50, 0.5) */
-    color: #ff9bcd;
-    background-color: rgba(90, 231, 172, 0.5);
     border-radius: 0 0 1rem 1rem;
 }

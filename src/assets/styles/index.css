@@ -103,6 +103,28 @@ html, body {
   transform: translateX(0%);
 } */
 
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+  z-index: 9999 !important;
+  width: 66.75%;
+  height: 95%;
+  margin-left: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.modalNotReadyYet {
+  position: absolute;
+  background-color: var(--blueGrace);
+  border: 5px groove var(--raspberryPink);
+  text-align: center;
+  width: 25%;
+  top: 40%;
+  left: 40%;
+}
+
 @media (max-width: 500px) {
   html, body {
     margin: 0;
