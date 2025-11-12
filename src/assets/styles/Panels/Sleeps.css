@@ -158,6 +158,7 @@
     color: var(--mintyGreen);
     line-height: 1.4;
     margin-right: 5px;
+    overflow-wrap: anywhere;
 }
 .sleepsEntryItem > strong {
     font-weight: 600;
@@ -184,10 +185,13 @@
     border-radius: 0 0 1rem 1rem;
 }
 @media (max-width: 500px) {
-.sleepsAddSection {
-    width: max-content;
-    background: linear-gradient(135deg, var(--raspberryPink), var(--blueGrace), var(--mintyGreen)) border-box;
-    border: 2px solid black;
-    padding-inline: 0.75rem;
-}
+    .sleepsAddSection {
+        width: max-content;
+        background: linear-gradient(135deg, var(--raspberryPink), var(--blueGrace), var(--mintyGreen)) border-box;
+        border: 2px solid black;
+        padding-inline: 0.75rem;
+    }
+    .sleepsPanelHeader {
+        font-size: 3rem;
+    }
 }

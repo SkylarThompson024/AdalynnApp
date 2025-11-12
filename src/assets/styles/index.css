@@ -113,6 +113,7 @@ html, body {
   margin-bottom: auto;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
+  border: 1px solid white;
 }
 
 .modalNotReadyYet {
@@ -197,6 +198,24 @@ html, body {
     /* border: #e74646 2px solid; */
     width: 80vw;
   }
+  .ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+  z-index: 9999 !important;
+  width: 90%;
+  height: 70%;
+  margin: auto;
+  border-radius: 15px;
+}
+
+.modalNotReadyYet {
+  position: absolute;
+  background-color: var(--blueGrace);
+  border: 5px groove var(--raspberryPink);
+  text-align: center;
+  width: 40%;
+  top: 40%;
+  left: 33%;
+}
 }
 
 

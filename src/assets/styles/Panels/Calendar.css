@@ -118,4 +118,16 @@
 .react-calendar__month-view__weekdays__weekday abbr {
     text-decoration: none;
 }
+@media (max-width: 500px) {
+    .calendarPanelHeader {
+        font-size: 3.5rem;
+    }
+    .calendarContainer {
+        padding: unset;
+    }
+    .react-calendar {
+        padding-left: 0.5rem;
+        max-width: 95%;
+    }
+}
 

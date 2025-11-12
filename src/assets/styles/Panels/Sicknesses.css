@@ -147,6 +147,7 @@
     color: var(--mintyGreen);
     line-height: 1.4;
     margin-right: 5px;
+    overflow-wrap: anywhere;
 }
 .sickEntryItem > strong {
     font-weight: 600;
@@ -171,4 +172,13 @@
 }
 .sickEntryItem:last-child {
     border-radius: 0 0 1rem 1rem;
+}
+
+@media (max-width: 500px) {
+    .sickPanelHeader {
+      font-size: 3rem;  
+    }
+    .sickEntryList {
+        max-width: 75%;
+    }
 }

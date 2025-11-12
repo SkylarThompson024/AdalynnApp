@@ -89,27 +89,27 @@ function App() {
   const handlePanelContent =  async (panelName) => {
     if (panelName === "Feedings") {
       const entries = await fetchFeedEntries()
-      setFeedEntries(entries)
+      setFeedEntries(entries.reverse())
     }
     if (panelName === "Sleeps") {
       const entries = await fetchSleepEntries()
-      setSleepEntries(entries)
+      setSleepEntries(entries.reverse())
     }
     if (panelName === "Diaper Change") {
       const entries = await fetchDiaperEntries()
-      setDiaperEntires(entries)
+      setDiaperEntires(entries.reverse())
     }
     if (panelName === "Doctor Appts") {
       const entries = await fetchDoctorEntries()
-      setDoctorEntries(entries)
+      setDoctorEntries(entries.reverse())
     }
     if (panelName === "Sicknesses") {
       const entries = await fetchSickEntries()
-      setSickEntries(entries)
+      setSickEntries(entries.reverse())
     }
     if (panelName === "Injuries") {
       const entries = await fetchInjuryEntries()
-      setInjuryEntries(entries)
+      setInjuryEntries(entries.reverse())
     }
   }
   const handleCardClick = (panelName) => {
