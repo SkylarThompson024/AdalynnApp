@@ -170,4 +170,9 @@
         width: 50%;
         font-size: 3rem;
     }
+    .diaperAddSection {
+        width: 90%;
+        margin-inline: auto;
+        border: 2px solid black;
+    }
 }

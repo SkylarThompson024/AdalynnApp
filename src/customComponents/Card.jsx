@@ -50,17 +50,17 @@ const labels = [
     },
     {
         name: 'Solid',
-        icon: 'poop',
+        icon: 'hot_tub',
         to: '/'
     },
     {
         name: 'Both',
-        icon: '2x',
+        icon: 'join_full',
         to: '/'
     },
     {
         name: 'Blowout',
-        icon: 'bomb',
+        icon: 'warning',
         to: '/'
     },
 ]
